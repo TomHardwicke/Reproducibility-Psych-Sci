@@ -90,8 +90,8 @@ source(here('analysis','preprocessing.R'))
 
 ```{r load_data}
 # loads the processed data files output by the preprocessing performed above
-load(here('data', 'processed', 'data_valuesLevel.RData')) # load data
-load(here('data', 'processed', 'data_articlesLevel.RData')) # load data
+load(here('data', 'processed', 'data_values.RData')) # load data
+load(here('data', 'processed', 'data_articles.RData')) # load data
 load(here('data', 'processed', 'data_kidwell.RData')) # load data
 ```
 
