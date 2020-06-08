@@ -6,3 +6,5 @@
 researchFiles/
 materials/
 protocol/
+*.pdf
+*.tex
