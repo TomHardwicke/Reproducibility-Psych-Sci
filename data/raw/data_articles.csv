@@ -1,0 +1,26 @@
+articleID,pilotNames,copilotNames,pilotTTC,copilotTTC,pilotStartDate,copilotStartDate,completionDate,Author_Assistance,finalOutcome,Insufficient_Information_Errors,locus_typo,locus_specification,locus_analysis,locus_data,locus_unidentified,locus_typo_resolved,locus_specification_resolved,locus_analysis_resolved,locus_data_resolved,locus_unidentified_resolved
+1-1-2015_PS,"Marc B. Harrison, Gobi Dasu",Michèle Nuijten,120,220,2017-10-26,2018-10-16,2019-07-22,FALSE,Failure without author assistance,0,0,0,0,0,1,NA,NA,NA,NA,NA
+1-6-2014_PS,"Tysen Dauer, Erik Santoro, Jaclyn Schwartz",Michèle Nuijten,525,1280,2017-10-26,2018-07-03,2018-05-02,TRUE,Failure despite author assistance,0,1,0,0,0,0,0,0,0,0,0
+10-7-2014_PS,"Jaclyn Schwartz, Drew Tysen Dauer, Erik Santoro",Ben Peloquin,420,240,2017-10-26,2018-06-20,2018-06-20,TRUE,Success with author assistance,0,0,1,0,0,0,0,1,0,0,0
+11-11-2014_PS,Tom Hardwicke,Michael Frank,150,180,2018-06-13,2018-10-18,2019-04-20,TRUE,Failure despite author assistance,0,1,0,0,0,0,0,0,0,0,0
+11-12-2014 PS,"Michael Ko, Danielle Boles",Tom Hardwicke,60,20,2017-10-27,2019-04-22,2019-04-22,FALSE,Success without author assistance,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+16-11-2014_PS,"Yochai Shavit, Kari Leibowitz",Tom Hardwicke,360,30,2017-11-01,2019-04-22,2019-04-22,FALSE,Success without author assistance,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+16-2-2015_PS,Emily Hembacher,"Michael Frank, Tom Hardwicke",300,120,2018-06-13,2018-10-19,2018-08-24,FALSE,Failure without author assistance,0,0,0,0,0,1,NA,NA,NA,NA,NA
+16-9-2014_PS,Manuel Bohn,Tom Hardwicke,360,60,2018-06-26,2018-10-11,2018-10-11,FALSE,Success without author assistance,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+2-10-2014_PS,Manuel Bohn,Tom Hardwicke,180,30,2018-08-27,2018-09-06,2018-09-06,FALSE,Success without author assistance,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+2-2-2015_PS,Bria Long,Tom Hardwicke,350,240,2018-06-13,2018-03-14,2019-10-21,TRUE,Success with author assistance,0,0,0,0,4,0,0,0,0,4,0
+3-10-2014_PS,"Gobi, Marc",Kyle MacDonald,720,100,2017-10-26,2018-06-13,2019-04-20,TRUE,Failure despite author assistance,2,0,1,0,0,2,0,0,0,0,0
+3-4-2015_PS,"Erik Santoro, Tysen Dauer, Jaclyn Schwartz","Erica Yoon, Tom Hardwicke",720,240,2017-10-31,2018-06-13,2018-09-07,TRUE,Failure despite author assistance,0,0,3,0,0,2,0,3,0,0,0
+3-9-2014_PS,"Katherine Hermann, Benjamin deMayo",Emily Hembacher,240,240,2017-11-04,2018-06-13,2018-06-14,TRUE,Failure despite author assistance,0,0,1,0,1,0,0,0,0,1,0
+4-1-2015_PS,"Sean Zion, Mufan Luo","Erica Yoon, Tom Hardwicke",500,220,2017-11-05,2018-10-19,2019-06-12,TRUE,Success with author assistance,0,0,0,0,0,1,0,0,0,0,1
+4-11-2014_PS,"Barbara Born, Elizabeth Blevins",Michael Frank,720,60,2017-10-29,2018-06-13,2018-06-13,FALSE,Success without author assistance,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+5-4-2015_PS,"Benjamin deMayo, Katherine Hermann",Emily Hembacher,240,150,2017-11-05,2018-06-14,2018-06-15,TRUE,Success with author assistance,0,0,1,0,0,0,0,1,0,0,0
+6-1-2015_PS,"Elizabeth Blevins, Barbara Barbosa Born",Manuel Bohn,420,60,2017-10-27,2018-10-19,2018-10-19,FALSE,Success without author assistance,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+6-7-2014_PS,"Dawn Finzi, Kiara Sanchez",Ben Peloquin,180,160,2017-11-02,2018-06-13,2018-06-20,FALSE,Success without author assistance,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+7-3-2015_PS,"Danielle Boles, Michael Ko",Ben Peloquin,150,200,2017-10-27,2018-06-13,2019-04-20,FALSE,Failure without author assistance,4,0,1,0,0,3,0,0,0,0,0
+8-12-2014_PS,Bria Long,Tom Hardwicke,180,180,2018-10-19,2019-06-29,2019-08-24,TRUE,Failure despite author assistance,0,0,1,0,0,1,0,1,0,0,0
+8-5-2015_PS,Kyle MacDonald,Tom Hardwicke,150,30,2018-06-13,2018-09-19,2018-09-19,FALSE,Success without author assistance,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+8-7-2014_PS,"Mufan Luo, Sean Raymond Zion","Tom Hardwicke, Manuel Bohn",240,200,2017-01-11,2018-06-06,2018-06-27,TRUE,Success with author assistance,0,0,4,0,0,0,0,4,0,0,0
+8-8-2014_PS,Michael Frank,Kyle MacDonald,120,60,2018-06-13,2018-06-13,2018-07-21,TRUE,Success with author assistance,0,0,2,0,0,1,0,2,0,0,1
+9-2-2015_PS,"Dawn Finzi, Kiara Sanchez",Tom Hardwicke,227,60,2017-11-04,2018-05-09,2018-05-09,FALSE,Success without author assistance,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+9-5-2014_PS,"Kari Leibowitz, Yochai Shavit","Kyle MacDonald, Tom Hardwicke",300,450,2017-11-01,2018-06-15,2018-09-07,TRUE,Failure despite author assistance,1,0,4,0,0,1,0,3,0,0,0

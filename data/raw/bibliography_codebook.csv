@@ -1,0 +1,6 @@
+﻿ColumnName,Description,Source,MeasurementType,Coding
+Article ID,Unique article idenitification code,Study authors,Character,Not applicable
+DOI,Digitial object identifier,Unknown bibliographic database,Character,Not applicable
+Title,Title of article,Unknown bibliographic database,Character,Not applicable
+Year,Year of article publication,Unknown bibliographic database,Character,Not applicable
+Authors,Article author names (shortened),Unknown bibliographic database,Character,Not applicable

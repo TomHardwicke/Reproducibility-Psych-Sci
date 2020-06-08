@@ -1,0 +1,13 @@
+﻿ColumnName,Description,Source,MeasurementType,Coding
+Article ID,Unique article idenitification code,Study authors,Character,Not applicable
+Authors,Article author names (shortened),Unknown bibliographic database,Character,Not applicable
+Year,Year of article publication,Unknown bibliographic database,Character,Not applicable
+Month,Month of article publication,Unknown bibliographic database,Character,Not applicable
+Title,Title of article,Unknown bibliographic database,Character,Not applicable
+DOI,Digitial object identifier,Unknown bibliographic database,Character,Not applicable
+Journal,Journal article was published in,Unknown bibliographic database,Character,Not applicable
+Volume,Volume of publication journal,Unknown bibliographic database,Character,Not applicable
+Issue,Issue of publication journal,Unknown bibliographic database,Character,Not applicable
+Pages,Page numbers of published article,Unknown bibliographic database,Character,Not applicable
+Descriptors,Article keywords,Unknown bibliographic database,Character,Not applicable
+Full author names,Article author names (full),Unknown bibliographic database,Character,Not applicable

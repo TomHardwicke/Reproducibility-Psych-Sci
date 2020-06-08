@@ -1,0 +1,22 @@
+﻿ColumnName,Description,Source,MeasurementType,Coding
+articleID,Unique article identification code,Assigned by Kidwell et al. (2016),Character,Not applicable
+pilotNames,Name(s) of reproducibility check 'pilot(s)',Manual entry in reproudicibility report,Character,Not applicable
+copilotNames,Name(s) of reproducibility check 'copilot(s)',Manual entry in reproudicibility report,Character,Not applicable
+pilotTTC,Active work time spent on complete reproducibility check by pilots,Manual entry in reproudicibility report,Numeric (minutes),Not applicable
+copilotTTC,Active work time spent on complete reproducibility check by copilots,Manual entry in reproudicibility report,Numeric (minutes),Not applicable
+pilotStartDate,Date first pilot started reproducibility check,Manual entry in reproudicibility report,Date (month/day/year),Not applicable
+copilotStartDate,Date first copilot started reproducibility check,Manual entry in reproudicibility report,Date (month/day/year),Not applicable
+completionDate,Date reproducibility check was completed,Manual entry in reproudicibility report,Date (month/day/year),Not applicable
+Author_Assistance,Whether original authors provided any substantive assistance to the reproducibility check,Manual entry in reproudicibility report,Binary,"TRUE = 'yes, there was author assistance'; FALSE ='no, there was no author assistance'"
+finalOutcome,The final outcome of the reproducibility check,Automated entry (via reproCheck function) in reproudicibility report,Categorical,Not applicable
+Insufficient_Information_Errors,Number of times pilot/copilot encountered insufficienct information to proceed with the reproducibiltiy check,Manual entry in reproudicibility report,Numeric (count),NA' = Not applicable
+locus_typo,Number of reproducibility issues were attributable to typographical errors,Manual entry in reproudicibility report,Numeric (count),NA' = Not applicable
+locus_specification,Number of reproducibility issues were attributable to unclear or incomplete analysis specification,Manual entry in reproudicibility report,Numeric (count),NA' = Not applicable
+locus_analysis,Number of reproducibility issues were attributable to incorrect analysis specification,Manual entry in reproudicibility report,Numeric (count),NA' = Not applicable
+locus_data,Number of reproducibility issues were attributable to problems with the data files,Manual entry in reproudicibility report,Numeric (count),NA' = Not applicable
+locus_unidentified,Number of reproducibility issues could not be attributed to a specific cause,Manual entry in reproudicibility report,Numeric (count),NA' = Not applicable
+locus_typo_resolved,Number of typographical errors were resolved after author involvement,Manual entry in reproudicibility report,Numeric (count),NA' = Not applicable
+locus_specification_resolved,Number of specification issues were resolved after author involvement,Manual entry in reproudicibility report,Numeric (count),NA' = Not applicable
+locus_analysis_resolved,Number of analysis issues were resolved after author involvement,Manual entry in reproudicibility report,Numeric (count),NA' = Not applicable
+locus_data_resolved,Number of data issues were resolved after author involvement,Manual entry in reproudicibility report,Numeric (count),NA' = Not applicable
+locus_unidentified_resolved,Number of unidentified issues were resolved after author involvement,Manual entry in reproudicibility report,Numeric (count),NA' = Not applicable

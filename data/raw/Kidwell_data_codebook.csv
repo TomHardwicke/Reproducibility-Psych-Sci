@@ -1,0 +1,44 @@
+﻿ColumnName,Description,Source,MeasurementType,Coding
+Timestamp,Time data was recorded,Google Form (automated),Date/time,Not applicable
+Your name,Name of data extractor,Google Form (data extractor),Character,Not applicable
+If other:,Name of data extractor if name not already provided as an option,Google Form (data extractor),Character,Not applicable
+Article ID number,Unique identification code assigned to article,Google Form (data extractor),Character,Not applicable
+Number of experiments,Number of experiments in article,Google Form (data extractor),Numeric,Not applicable
+Did the article receive a badge for open data?,See name,Google Form (data extractor),Categorical,Not applicable
+Does the article state whether or not the data are available?,See name,Google Form (data extractor),Categorical,Not applicable
+Data statement indicates that data are:,See name,Google Form (data extractor),Categorical,Not applicable
+"Quote of data statement, if provided",See name,Google Form (data extractor),Character,Not applicable
+"Page number of data statement, if provided",See name,Google Form (data extractor),Categorical,Not applicable
+How are data accessible?,See name,Google Form (data extractor),Categorical,Not applicable
+URL to dataset,See name,Google Form (data extractor),Character,Not applicable
+Data URL links to:,See name,Google Form (data extractor),Character,Not applicable
+"If data URL links to an independent archive / repository, which repository?",See name,Google Form (data extractor),Categorical,Not applicable
+Does the data URL go to a working page?,See name,Google Form (data extractor),Categorical,Not applicable
+Are the data located at the working page?,See name,Google Form (data extractor),Categorical,Not applicable
+Can the data be downloaded?,See name,Google Form (data extractor),Categorical,Not applicable
+Does the data correspond to what is reported in the article?,See name,Google Form (data extractor),Categorical,Not applicable
+Are the data complete?,See name,Google Form (data extractor),Categorical,Not applicable
+Is a codebook included with the data (or other means of understanding the variables)?,See name,Google Form (data extractor),Categorical,Not applicable
+Are analysis scripts included with the data?,See name,Google Form (data extractor),Categorical,Not applicable
+Are the data understandable and usable after brief review?,See name,Google Form (data extractor),Categorical,Not applicable
+Is anything else included with the data?,See name,Google Form (data extractor),Character,Not applicable
+Did the article receive a badge for open materials?,See name,Google Form (data extractor),Categorical,Not applicable
+Does the article state whether or not any research materials are available?,See name,Google Form (data extractor),Categorical,Not applicable
+Statement indicates that materials are:,See name,Google Form (data extractor),Categorical,Not applicable
+"Quote of materials statement, if provided",See name,Google Form (data extractor),Character,Not applicable
+"Page number of materials statement, if provided",See name,Google Form (data extractor),Character,Not applicable
+How are materials accessible? Please only fill out this question and the questions below if the article's statement indicates that the materials are available. ,See name,Google Form (data extractor),Categorical,Not applicable
+URL to materials,See name,Google Form (data extractor),Character,Not applicable
+Materials URL links to:,See name,Google Form (data extractor),Categorical,Not applicable
+"If materials URL links to an independent archive / repository, which repository?",See name,Google Form (data extractor),Categorical,Not applicable
+Does the materials URL go to a working page?,See name,Google Form (data extractor),Categorical,Not applicable
+Are the materials located at the working page?,See name,Google Form (data extractor),Categorical,Not applicable
+Can the materials be downloaded?,See name,Google Form (data extractor),Categorical,Not applicable
+Do the materials correspond to what is reported in the article?,See name,Google Form (data extractor),Categorical,Not applicable
+Are the materials complete?,See name,Google Form (data extractor),Categorical,Not applicable
+Are analysis scripts included with the materials?,See name,Google Form (data extractor),Categorical,Not applicable
+Are the materials understandable and usable after brief review?,See name,Google Form (data extractor),Categorical,Not applicable
+Is anything else included with the materials?,See name,Google Form (data extractor),Categorical,Not applicable
+Does the article state whether there is supplemental information available?,See name,Google Form (data extractor),Categorical,Not applicable
+URL to supplemental information,See name,Google Form (data extractor),Character,Not applicable
+Corresponding author e-mail address,See name,Google Form (data extractor),Character,Not applicable
