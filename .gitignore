@@ -1,7 +1,6 @@
-.Rproj
+*.Rproj
 .Rproj.user
 .Rhistory
-.RData
 .Ruserdata
 .DS_Store
 *.pdf
@@ -9,3 +8,4 @@
 researchFiles/
 materials/
 protocol/
+.RData
