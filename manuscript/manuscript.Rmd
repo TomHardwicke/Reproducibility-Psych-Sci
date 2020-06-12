@@ -18,7 +18,7 @@ author:
     affiliation   : "5"
   - name          : "Benjamin N. Peloquin"
     affiliation   : "3"
-  - name          : "Benny deMayo"
+  - name          : "Benjamin E. deMayo"
     affiliation   : "3"
   - name          : "Bria Long"
     affiliation   : "3"
