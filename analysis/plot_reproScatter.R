@@ -18,10 +18,11 @@ makeScatter <- function(thisData){
     geom_point(alpha = 1, size = 2.5) +
     geom_vline(data = NULL, aes(xintercept = 0.05), colour = "black", linetype = "dashed") +
     geom_hline(data = NULL, aes(yintercept = 0.05), colour = "black", linetype = "dashed") +
-    theme_bw() +
-    theme(panel.grid.minor = element_blank(),
+    theme_bw(base_size = 12) +
+    theme(axis.text = element_text(colour = 'black'),
+          panel.grid.minor = element_blank(),
           panel.grid.major = element_blank(),
-          panel.background = element_rect(fill = "white", colour = "black", size = 1.2)) +
+          panel.background = element_rect(fill = "white", colour = "black", size = 1)) +
     scale_shape_manual(name = 'reproducibility\noutcome', 
                        values = c(4,1,2,8), 
                        labels = c("Match", "Minor discrepancy", "Major discrepancy", "Decision error")) +

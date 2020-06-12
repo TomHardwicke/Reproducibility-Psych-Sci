@@ -32,6 +32,7 @@ valueTypePlot <- data_values %>%
                     labels = c("Match", "Minor\ndiscrepancy", "Major\ndiscrepancy")) +
   ylab('count') +
   xlab('\nvalue type') +
-  theme_minimal() +
-  theme(panel.grid.major.x = element_blank(),
+  theme_minimal(base_size = 12) +
+  theme(axis.text = element_text(colour = 'black'),
+        panel.grid.major.x = element_blank(),
         legend.position = 'bottom')
