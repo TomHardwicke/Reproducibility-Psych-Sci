@@ -13,14 +13,18 @@ numberRemoved <- data_values %>%
 #   filter(valueType == 'd')
 
 makeScatter <- function(thisData){
-  ggplot(data = thisData, aes(colour = comparisonOutcome, x = reportedValue, y = obtainedValue)) +
-    geom_abline(intercept = 0, colour = 'darkgrey') +
-    geom_point(alpha = 1, size = 2, shape = 4) +
-    theme_minimal() +
-    theme(panel.grid.minor = element_blank()) +
-    scale_colour_manual(name = 'reproducibility\noutcome', 
-                        values = c(green, blue, purple, 'red'),
-                        labels = c("Match", "Minor discrepancy", "Major discrepancy", "Decision error")) + 
+  ggplot(data = thisData, aes(x = reportedValue, y = obtainedValue, shape = comparisonOutcome)) +
+    geom_abline(intercept = 0, colour = 'black') +
+    geom_point(alpha = 1, size = 2.5) +
+    geom_vline(data = NULL, aes(xintercept = 0.05), colour = "black", linetype = "dashed") +
+    geom_hline(data = NULL, aes(yintercept = 0.05), colour = "black", linetype = "dashed") +
+    theme_bw() +
+    theme(panel.grid.minor = element_blank(),
+          panel.grid.major = element_blank(),
+          panel.background = element_rect(fill = "white", colour = "black", size = 1.2)) +
+    scale_shape_manual(name = 'reproducibility\noutcome', 
+                       values = c(4,1,2,8), 
+                       labels = c("Match", "Minor discrepancy", "Major discrepancy", "Decision error")) +
     ylab('reanalysis p-value') +
     xlab('reported p-value') +
     coord_fixed()
