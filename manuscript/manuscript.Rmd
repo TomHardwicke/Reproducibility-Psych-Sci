@@ -224,7 +224,7 @@ In no cases did the observed numerical discrepancies appear to be consequential 
 
 [^authorInfo]: All except one case involved the provision of additional information that was not included in the original article or clarification of original information that was ambiguous or incomplete.In the exception case (4-1-2015_PS), the authors pointed out that we had missed a relevant footnote in the original article.
 
-```{r scatterPlot, fig.cap="Scatterplot showing reported p-values as a function of reanalysis p-values, classified by reproducibility outcome. Axes are on a log scale. For display purposes, 41 values below 0.001 are not shown.", fig.path="figs/"}
+```{r scatterPlot, fig.cap="Scatterplot showing reanalysis p-values as a function of reported p-values, classified by reproducibility outcome. Axes are on a log scale. For display purposes, 41 values below 0.001 are not shown.", fig.path="figs/"}
 source(here('analysis','plot_reproScatter.R')) # build plot
 scatterPlot # show plot
 ```
