@@ -17,8 +17,9 @@ precCurve_fixN <- function(P, Z = 1.96, N){
   
   # build plot
   plot <- ggplot(data = data.frame(effectSize = seq(0,1,.01), precision = vector), aes(x = effectSize, y = precision)) +
-    geom_line(colour = 'darkblue', size = 1) +
-    theme_classic() +
+    geom_line(colour = 'black', size = 1) +
+    theme_classic(base_size = 12) +
+    theme(axis.text = element_text(colour = 'black')) +
     ylab('Margin of error') +
     xlab('Effect size') +
     scale_x_continuous(expand = c(0.01, 0), limits = c(0,1)) +
@@ -90,8 +91,9 @@ locusPlot <- rbind(locus_before, locus_after) %>%
     geom_col(width = .8) +
     scale_fill_manual(name = 'status', values=c('grey', 'gray20'), labels = c('resolved after\nauthor involvement', 'unresolved')) +
     xlab('locus of non-reproducibility') +
-    theme_minimal() +
-    theme(panel.grid.major.x = element_blank()) +
+    theme_minimal(base_size =  12) +
+    theme(axis.text = element_text(colour = 'black'),
+          panel.grid.major.x = element_blank()) +
   ylim(0,20)
 ```
 
@@ -114,8 +116,10 @@ timePlot <- data_articles %>%
     facet_grid(rows = 'finalOutcome') +
     xlab("estimated active work hours") +
     ylab("number of reproducibility checks") +
-    theme_minimal() +
-    theme(panel.grid.minor.y = element_blank()) +
+    theme_minimal(base_size = 12) +
+    theme(axis.text = element_text(colour = 'black'),
+          panel.grid.minor.y = element_blank(),
+          strip.text.y = element_text(size = 9)) +
     scale_fill_manual(values = c(green, yellow, blue, purple), guide=F) +
     scale_y_continuous(breaks = c(0,1,2,3), labels = c('0','1','2','3'))
 ```
