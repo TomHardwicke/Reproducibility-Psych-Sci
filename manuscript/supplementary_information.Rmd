@@ -42,7 +42,7 @@ We downloaded data from the @kidwell2016 study (available here: https://osf.io/u
 
 The first finding encountered in the article that met these eligibility criteria was selected. The target values for the reproducibility checks were a coherent set of descriptive and inferential statistics related to this finding, typically 2-3 paragraphs of information, occasionally accompanied by a table or figure. During this assessment, `r length(noEligibleFinding)` articles were excluded because they did not meet the eligibility criteria (ID codes: `r paste(noEligibleFinding, sep="", collapse = ", ")`). An additional article was excluded because the data no longer appeared to be available (contra Kidwell et al., 2016; ID code: `r dataNoLongerAvailable`). In total, `r data_kidwell_eligible %>% nrow()` eligible articles were identified. A bibliography file is available where article ID codes can be matched to their references (https://osf.io/rszey/). Note that there was a reporting error in our pre-registered protocol which said that article 16-2-2015 was excluded when it was not.
 
-A precision analysis (not pre-registered and performed after study completion) shows the range of expected margin of error (confidence interval width) for the range of possible effect sizes given our sample size of 25 articles (Figure \@ref(fig:precisionCurve)). The maximum margin of error is `r maxMOE`.
+A precision analysis (not pre-registered and performed after study completion) shows the range of expected margin of error (confidence interval width) for the range of possible effect sizes (proportion) given our sample size of 25 articles (Figure \@ref(fig:precisionCurve)). The maximum margin of error is `r maxMOE`.
 
 ```{r precisionCurve, fig.cap='Precision analysis yielding expected margin of error (confidence interval width) relative to effect size (proportion) for a sample size of 25.', fig.width=7, fig.height = 5, fig.path="figs/"}
 precisionCurvePlot
@@ -209,7 +209,7 @@ We requested the following additional information from the authors: (1) the calc
 
 ## Vignette 3 (article 1-1-2015_PS)
 
-Outcome: Not fully reproducible (without author involvement)
+Outcome: Not fully reproducible (with no author involvement)
 
 Substantial implications for the original conclusions: Unlikely.
 
@@ -309,7 +309,7 @@ We could initially reproduce all values except for one p-value reported for a si
 
 ## Vignette 9 (article 16-2-2015_PS)
 
-Outcome: Not fully reproducible (without author involvement)
+Outcome: Not fully reproducible (with no author involvement)
 
 Substantial implications for the original conclusions: Unlikely.
 
@@ -481,7 +481,7 @@ We encountered no major difficulties reproducing all target values for this arti
 
 ## Vignette 19 (article 7-3-2015_PS)
 
-Outcome: Not fully reproducible (without author involvement)
+Outcome: Not fully reproducible (with no author involvement)
 
 Substantial implications for the original conclusions: Unknown (analysis could not be completed)
 
