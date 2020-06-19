@@ -78,11 +78,6 @@ library(DescTools) # for calculating confidence intervals
 library(english) # for converting numbers to words
 ```
 
-```{r load_functions}
-# load functions for calculating confidence intervals and performing min-max normalization
-source(here('analysis','functions.R'))
-```
-
 ```{r perform_preprocessing}
 # loads the raw data and performs preprocessing. Saves preprocessed files.
 source(here('analysis','preprocessing.R'))
@@ -93,6 +88,11 @@ source(here('analysis','preprocessing.R'))
 load(here('data', 'processed', 'data_values.RData')) # load data
 load(here('data', 'processed', 'data_articles.RData')) # load data
 load(here('data', 'processed', 'data_kidwell.RData')) # load data
+```
+
+```{r load_functions}
+# load functions for calculating confidence intervals and performing min-max normalization
+source(here('analysis','functions.R'))
 ```
 
 ```{r}

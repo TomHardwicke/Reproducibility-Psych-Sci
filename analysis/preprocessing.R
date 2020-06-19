@@ -41,7 +41,7 @@ data_values <- data_values %>%
     TRUE ~ reportedValue # otherwise retain the reported value
   ))
 
-# If the eyeball check was FALSE (no match), then we will use the threshold value as a a proxy for the reported value
+# If the eyeball check was FALSE (no match), then we will use the threshold value as a proxy for the reported value
 # We need to make these changes manually:
 data_values <- data_values %>% 
   mutate(reportedValue = case_when(
@@ -124,4 +124,4 @@ save(data_articles, file = here('data', 'processed', 'data_articles.RData'))
 save(data_kidwell, file = here('data', 'processed', 'data_kidwell.RData'))
 
 # Tidy up
-#rm(list = ls()) # remove all objects from the R environment
+rm(list = ls()) # remove all objects from the R environment
