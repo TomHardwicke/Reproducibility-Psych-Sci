@@ -1,6 +1,17 @@
 # Performs pre-processing  
 
-# load data from Kidwell et al. Originally available here: https://osf.io/u6g7t/
+# load data from Hardwicke et al. (2018)
+# NB - the OSF code below can be used to download the original data file directly from the authors' OSF repository
+# There's no need to run this code as are going to work with a local copy to ensure internal reproducibility (e.g., to protect against the file being lost at the original source)
+# osfFile <- osf_retrieve_file("https://osf.io/hvytz/") %>%
+#   osf_download(path = 'data/raw/')
+data_hardwicke2018 <- read_csv(here("data", "raw", "Hardwicke2018_Data.csv"))
+
+# load data from Kidwell et al. 2016
+# NB - the OSF code below can be used to download the original data file directly from the authors' OSF repository
+# There's no need to run this code as are going to work with a local copy to ensure internal reproducibility (e.g., to protect against the file being lost at the original source)
+# osfFile <- osf_retrieve_file("https://osf.io/u6g7t/") %>%
+#   osf_download(path = 'data/raw/')
 data_kidwell <- read_csv(here('data','raw','Kidwell_data.csv'))
 data_kidwell_bib <- read_csv(here('data','raw','Kidwell_bibliographic.csv'))
 
@@ -122,6 +133,7 @@ data_articles <- data_articles %>%
 save(data_values, file = here('data', 'processed', 'data_values.RData'))
 save(data_articles, file = here('data', 'processed', 'data_articles.RData'))
 save(data_kidwell, file = here('data', 'processed', 'data_kidwell.RData'))
+save(data_hardwicke2018, file = here('data', 'processed', 'data_hardwicke2018.RData'))
 
 # Tidy up
 rm(list = ls()) # remove all objects from the R environment
