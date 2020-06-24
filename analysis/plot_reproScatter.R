@@ -3,14 +3,11 @@ scatterData_p <- data_values %>%
   filter(reportedValue >= 0.001, # select only p-values above 0.001 for display purposes
          obtainedValue >= 0.001)
 
-numberRemoved <- data_values %>%
+numberRemoved <- data_values %>% # identify the number of values below 0.001 that are not being shown for display purposes
   filter(valueType == 'p') %>%
   filter(reportedValue < 0.001 |
          obtainedValue < 0.001) %>%
   nrow()
-
-# scatterData_d <- data_values %>%
-#   filter(valueType == 'd')
 
 makeScatter <- function(thisData){
   ggplot(data = thisData, aes(x = reportedValue, y = obtainedValue, shape = comparisonOutcome)) +
