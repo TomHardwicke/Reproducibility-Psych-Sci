@@ -155,6 +155,8 @@ The pre-registered protocol used the terminology "reproducibility failure" and "
 The pre-registered protocol stated that “After contacting authors for assistance, a maximum time-limit of 2 months for resolution of any issues will be observed. Any reproducibility issues that cannot be resolved within this time-period will be considered reproducibility failures for the purposes of the present investigation.” 
 We decided not to impose this time limit as  it seemed unreasonable that delays on our side could influence reproducibility outcomes. Authors were able to respond until the project was completed on June 2, 2020.
 
+The pre-registered protocol does not state that we will run a meta-analysis. When writing up the present study, we decided it would be useful to run a meta-analysis to synthesize the evidence with the study by Hardwicke et al. (2018) which is highly comparable in goal and design.
+
 # Reproducibility vignettes {#vignettes}
 
 Each of the reproducibility checks is summarised below in a short vignette. Each vignette contains a link to a full R Markdown report rendered in HTML that will take the reader through the reanalysis process step-by-step. A link is also provided to an OSF/Github repository that contains all relevant data and analysis code and a link to a Code Ocean container which recreates the software environment in which the original analyses were run to facilitate reproducibility.
