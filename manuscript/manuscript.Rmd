@@ -13,19 +13,19 @@ author:
   - name          : "Kyle MacDonald"
     affiliation   : "4"
   - name          : "Emily Hembacher"
-    affiliation   : "3"    
+    affiliation   : "5"    
   - name          : "Michèle B. Nuijten"
-    affiliation   : "5"
+    affiliation   : "6"
   - name          : "Benjamin N. Peloquin"
-    affiliation   : "3"
+    affiliation   : "5"
   - name          : "Benjamin E. deMayo"
-    affiliation   : "3"
+    affiliation   : "5"
   - name          : "Bria Long"
-    affiliation   : "3"
+    affiliation   : "5"
   - name          : "Erica J. Yoon"
-    affiliation   : "3"
+    affiliation   : "5"
   - name          : "Michael C. Frank"
-    affiliation   : "3"
+    affiliation   : "5"
 
 affiliation:
   - id            : "1"
@@ -33,10 +33,12 @@ affiliation:
   - id            : "2"
     institution   : "Charité – Universitätsmedizin Berlin"
   - id            : "3"
-    institution   : "Stanford University"
+    institution   : "Max Planck Institute for Evolutionary Anthropology"
   - id            : "4"
     institution   : "University of California, Los Angeles"
   - id            : "5"
+    institution   : "Stanford University"
+  - id            : "6"
     institution   : "Tilburg University"
        
     
@@ -46,7 +48,7 @@ author_note: >
   Tom E. Hardwicke, Department of Psychology, University of Amsterdam & Meta-Research Innovation Center Berlin (METRIC-B), QUEST Center for Transforming Biomedical Research, Charité – Universitätsmedizin Berlin. Manuel Bohn, Emily Hembacher, Benjamin N. Peloquin, Benny deMayo, Bria Long, Erica J. Yoon, Michael C. Frank, Department of Psychology, Stanford University. Kyle MacDonald, Department of Communication, University of California, Los Angeles. Michèle B. Nuijten, Department of Methodology and Statistics, Tilburg School of Social and Behavioral Sciences, Tilburg University.
 
 abstract: | 
-  For any scientific report, repeating the original analyses upon the original data should yield the original outcomes. We evaluated analytic reproducibility in `r knitr::load_cache(label = 'abstract_text', object = 'totalArticles')` Psychological Science articles awarded open data badges between 2014-2015. Initially, `r knitr::load_cache(label = 'abstract_text', object = 'intialReproRateArticles')` articles contained at least one “major numerical discrepancy” (>10% difference) prompting us to request input from original authors. Ultimately, target values were reproducible without author involvement for `r knitr::load_cache(label = 'abstract_text', object = 'repro_noAI')` articles; reproducible with author involvement for `r knitr::load_cache(label = 'abstract_text', object = 'repro_withAI')` articles; not fully reproducible with no substantive author response for `r knitr::load_cache(label = 'abstract_text', object = 'noRepro_noAI')` articles; and not fully reproducible despite author involvement for `r knitr::load_cache(label = 'abstract_text', object = 'noRepro_withAI')` articles. Overall, `r knitr::load_cache(label = 'abstract_text', object = 'majorErrors')` major numerical discrepancies remained out of `r knitr::load_cache(label = 'abstract_text', object = 'totalValues')` checked values `r knitr::load_cache(label = 'abstract_text', object = 'reproRateValues')`, but original conclusions did not appear affected. Non-reproducibility was primarily caused by unclear analysis reporting. Open data alone is not sufficient to ensure analytic reproducibility.
+  For any scientific report, repeating the original analyses upon the original data should yield the original outcomes. We evaluated analytic reproducibility in `r knitr::load_cache(label = 'abstract_text', object = 'totalArticles')` Psychological Science articles awarded open data badges between 2014-2015. Initially, `r knitr::load_cache(label = 'abstract_text', object = 'intialReproRateArticles')` articles contained at least one “major numerical discrepancy” (>10% difference) prompting us to request input from original authors. Ultimately, target values were reproducible without author involvement for `r knitr::load_cache(label = 'abstract_text', object = 'repro_noAI')` articles; reproducible with author involvement for `r knitr::load_cache(label = 'abstract_text', object = 'repro_withAI')` articles; not fully reproducible with no substantive author response for `r knitr::load_cache(label = 'abstract_text', object = 'noRepro_noAI')` articles; and not fully reproducible despite author involvement for `r knitr::load_cache(label = 'abstract_text', object = 'noRepro_withAI')` articles. Overall, `r knitr::load_cache(label = 'abstract_text', object = 'majorErrors')` major numerical discrepancies remained out of `r knitr::load_cache(label = 'abstract_text', object = 'totalValues')` checked values `r knitr::load_cache(label = 'abstract_text', object = 'reproRateValues')`, but original conclusions did not appear affected. Non-reproducibility was primarily caused by unclear analysis reporting. These results highlight that open data alone is not sufficient to ensure analytic reproducibility.
   
 keywords          : "open data, badges, reproducibility, open science, meta-research, journal policy"
 
@@ -76,6 +78,9 @@ library(tidylog) # inline analysis feedback
 library(here) # for finding files
 library(DescTools) # for calculating confidence intervals
 library(english) # for converting numbers to words
+#library(metafor) # for meta-analysis
+library(meta) # for forest plot
+library(osfr) # to download data from the Open Science Framework (for meta-analysis)
 ```
 
 ```{r perform_preprocessing}
@@ -85,9 +90,10 @@ source(here('analysis','preprocessing.R'))
 
 ```{r load_data}
 # loads the processed data files output by the preprocessing performed above
-load(here('data', 'processed', 'data_values.RData')) # load data
-load(here('data', 'processed', 'data_articles.RData')) # load data
-load(here('data', 'processed', 'data_kidwell.RData')) # load data
+load(here('data', 'processed', 'data_values.RData')) # load value-level data
+load(here('data', 'processed', 'data_articles.RData')) # load article-level data
+load(here('data', 'processed', 'data_kidwell.RData')) # load kidwell2016 data
+load(here('data', 'processed', 'data_hardwicke2018.RData')) # load hardwicke2018 data
 ```
 
 ```{r load_functions}
@@ -105,7 +111,7 @@ yellow <- "#DFF57F"
 
 A minimum quality standard expected of all scientific manuscripts is that any numerical values can be reproduced if the original analyses are repeated upon the original data [@bollen2015]. This concept is known as *analytic reproducibility* [@lebel2018; or relatedly, *computational reproducibility*[^compRepro], @stodden2018]. When a number cannot be reproduced, this minimally indicates that the process by which it was calculated has not been sufficiently documented. Non-reproducibility may also indicate that an error has occurred, either during the original calculation or subsequent reporting. Either way, there is a breakdown in the integrity of the analysis pipeline that transforms raw data into reported results. As a result, non-reproducibility can create uncertainty about the provenance and veracity of scientific evidence, potentially undermining the credibility of any associated inferences. As a result, non-reproducibility can undermine data re-use [@hardwicke2018a], complicate replication attempts [@nuijten2018], and create uncertainty about the provenance and veracity of scientific evidence, potentially undermining the credibility of any associated inferences [@lebel2018].
 
-[^compRepro]: Assessments of computational reproducibility typically attempt to reproduce values by re-running original computational code with the original data and can therefore fail if original code is unavailable or non-functioning [e.g., @stodden2018]. By contrast, assessments of analytic reproducibility typically attempt to reproduce values by repeating the original analysis procedures, which can involve implementing those procedures in new code [e.g., @hardwicke2018a].
+[^compRepro]: Computational reproducibility is often assessed by attempting to re-run original computational code and can therefore fail if original code is unavailable or non-functioning [e.g., @stodden2018]. By contrast, analytic reproducibility is assessed by attempting to repeat the original analysis procedures, which can involve implementing those procedures in new code if necessary [e.g., @hardwicke2018a].
 
 Difficulty establishing the analytic reproducibility of research reports has been encountered in several scientific domains, including economics, political science, and psychology [@chang2015; @eubank2016; @stodden2018; @obels2019; @hardwicke2018a; but see @naudet2018]. A preliminary obstacle for many such studies is that research data are typically unavailable [@hardwicke2018; @hardwicke2020a; @wicherts2006]. Even when data can be accessed, suboptimal management and inadequate documentation can complicate data reuse [@hardwicke2018a; @kidwell2016]. These failures to adequately preserve and share earlier stages of the research pipeline typically preclude downstream assessment of analytic reproducibility.
 
@@ -168,7 +174,7 @@ totalArticles <- data_kidwell_eligible %>% nrow()
 
 The sample was based on a corpus of psychology articles that had been examined in a previous project investigating the impact of an “open badges” scheme introduced at Psychological Science [@kidwell2016]. This sample was selected because the open badges scheme and assessment of reusability by @kidwell2016 enabled us to largely circumvent upstream issues related to data availability and data management and instead focus on downstream issues related to analytic reproducibility. A precision analysis indicates that the sample size affords adequate precision for the purposes of gauging policy compliance (Supplementary Information \@ref(sup_sample)).
 
-Of `r data_kidwell_badge %>% nrow()` articles marked with an open data badge, Kidwell and colleagues had identified `r data_kidwell_badge_reusable %>% nrow()` with datasets that met four reusability criteria (accessible, correct, complete, and understandable). For each of these articles, one investigator (TEH) attempted to identify a coherent set of descriptive and inferential statistics, roughly 2-3 paragraphs of text, sometimes including a table or figure, related to a ‘substantive’ finding based on ‘relatively straightforward’ analyses. We focused on substantive findings because they are the most important and straightforward analyses to ensure that our team had sufficient expertise to re-run them. In total, `r nrow(data_values)` discrete numerical values reported in `r totalArticles` articles were identified as target values. The articles were published between January 2014 and May 2015. Further information about the sample is available in Supplementary Information \@ref(sup_sample).
+Of `r data_kidwell_badge %>% nrow()` articles marked with an open data badge, Kidwell and colleagues had identified `r data_kidwell_badge_reusable %>% nrow()` with datasets that met four reusability criteria (accessible, correct, complete, and understandable). For each of these articles, one investigator (TEH) attempted to identify a coherent set of descriptive and inferential statistics (e.g., means, standard deviations, t-values, p-values; see Figure \@ref(fig:valueTypePlot)), roughly 2-3 paragraphs of text, sometimes including a table or figure, related to a ‘substantive’ finding based on ‘relatively straightforward’ analyses. We focused on substantive findings because they are the most important and straightforward analyses to ensure that our team had sufficient expertise to re-run them. In total, `r nrow(data_values)` discrete numerical values reported in `r totalArticles` articles were identified as target values. The articles were published between January 2014 and May 2015. Further information about the sample is available in Supplementary Information \@ref(sup_sample).
 
 ## Procedure
 
@@ -177,6 +183,8 @@ The primary aim of the reproducibility checks was to recover the reported target
 ## Data analysis 
 
 The results can be considered at several layers of granularity. Detailed qualitative information about each reproducibility check is available in the individual reproducibility reports (https://osf.io/hf9jy/) and summarized in a short ‘vignette’ available in Supplementary Information \@ref(vignettes). We report descriptive and inferential statistics at the article-level and value-level. We report descriptive and inferential[^infStat] statistics at the article-level and value-level. Ninety-five per cent confidence intervals (CIs) are displayed in square brackets.
+
+The present study is highly comparable in goal and design to a previous study (Hardwicke et al. 2018), presenting an opportunity to synthesize their estimates of analytic reproducibility in psychology. To this end, we used random-effects models to meta-analyze the raw proportion estimates of article-level analytic reproducibility for the two studies, separately before and after original authors were contacted.
 
 [^infStat]: Note that although one goal of the study was to characterize analytic reproducibility within a finite sample as a follow-up to Kidwell et al. (2016), we were also interested in generalizing to other psychology articles. To address this second goal, we use standard inferential statistics, recognizing that, because they are generated from a convenience sample, the generality of our findings may be limited.
 
@@ -216,7 +224,7 @@ insuffInfoErrors <- data_articles %>% filter(Insufficient_Information_Errors > 0
 insuffInfoErrors_percent <- insuffInfoErrors/totalArticles*100 # calculate percent
 insuffInfoErrors_CIs <- propCI(insuffInfoErrors,totalArticles) # caluclate CIs
 ```
-Prior to author involvement, our reproducibility checks indicated that `r reproBefore %>% filter(reproOutcome == F) %>% pull(n)` out of the `r totalArticles` (`r reproBefore %>% filter(reproOutcome == F) %>% pull(percent)`) articles contained at least one major numerical discrepancy. After requesting input from original authors, several issues were resolved through the provision of additional information[^authorInfo] leaving `r reproAfter %>% filter(reproOutcome == F) %>% pull(n)` out of the `r totalArticles` (`r reproAfter %>% filter(reproOutcome == F) %>% pull(percent)`) articles containing at least one major numerical discrepancy. The full breakdown of reproducibility outcomes after author contact are shown in Table \@ref(tab:reproTab). Aspects of `r as.english(insuffInfoErrors)` reproducibility checks could not be completed as there was insufficient information to proceed with the reanalysis. Availability of original analysis scripts appeared to provide some modest benefits in terms of reproducibility outcomes and time expenditure (see Supplementary Information \@ref(sup_results)). In no cases did the observed numerical discrepancies appear to be consequential for the conclusions stated in the original articles (see Supplementary Information \@ref(vignettes)).
+Prior to seeking original author involvement, all target outcomes in `r reproBefore %>% filter(reproOutcome == T) %>% pull(n)` out of the `r totalArticles` articles (`r reproBefore %>% filter(reproOutcome == T) %>% pull(percent)`) were reproducible, with the remaining `r reproBefore %>% filter(reproOutcome == F) %>% pull(n)` (`r reproBefore %>% filter(reproOutcome == F) %>% pull(percent)`) containing at least one major numerical discrepancy. After requesting input from original authors, several issues were resolved through the provision of additional information[^authorInfo] and ultimately all target outcomes in `r reproAfter %>% filter(reproOutcome == T) %>% pull(n)` (`r reproAfter %>% filter(reproOutcome == T) %>% pull(percent)`) articles were reproducible, with the remaining `r reproAfter %>% filter(reproOutcome == F) %>% pull(n)` (`r reproAfter %>% filter(reproOutcome == F) %>% pull(percent)`) articles containing at least one major numerical discrepancy. The full breakdown of reproducibility outcomes after author contact are shown in Table \@ref(tab:reproTab) and the results of a meta-analysis synthesizing the findings with those of a previous study [@hardwicke2018a] are displayed in Figure \@ref(fig:forestPlot). Aspects of `r as.english(insuffInfoErrors)` reproducibility checks could not be completed as there was insufficient information to proceed with the reanalysis. Availability of original analysis scripts appeared to provide some modest benefits in terms of reproducibility outcomes and time expenditure (see Supplementary Information \@ref(sup_results)). In no cases did the observed numerical discrepancies appear to be consequential for the conclusions stated in the original articles (see Supplementary Information \@ref(vignettes)).
 
 [^authorInfo]: All except one case involved the provision of additional information that was not included in the original article or clarification of original information that was ambiguous or incomplete.In the exception case (4-1-2015_PS), the authors pointed out that we had missed a relevant footnote in the original article.
 
@@ -245,6 +253,13 @@ data.frame("Target values fully reproducible?" = c("Yes", "Yes", "No", "No"),
 ```{r scatterPlot, fig.cap="Scatterplot showing reanalysis p-values as a function of reported p-values, classified by reproducibility outcome. Axes are on a log scale. For display purposes, 41 values below 0.001 are not shown.", fig.path="figs/"}
 source(here('analysis','plot_reproScatter.R')) # build plot
 scatterPlot # show plot
+```
+```{r}
+source(here('analysis','meta_analysis.R'))
+```
+
+```{r fig.cap="Forest plot showing the proportion of articles with fully reproducible target outcomes in Hardwicke et al. (2018) and the present study before and after contacting original authors for assistance with reproducibility checks. Squares represent individual study proportions (with size proportional to meta-analytic weighting). Diamonds represent summary proportions estimated by random effects (RE) models. Error bars represent 95% confidence intervals (CIs).", fig.path="figs/"}
+include_graphics(here('manuscript', 'figs', 'forestPlot.png'))
 ```
 
 ```{r}
@@ -298,7 +313,8 @@ Team members provided concurrent estimates of their time spent on each stage of 
 # Discussion
 
 A reasonable expectation of any scientific manuscript is that repeating the original analyses upon the original data will yield the same quantitative outcomes [@bollen2015]. We have found that this standard of analytic reproducibility was frequently not met in a sample of Psychological Science articles receiving open data badges. Importantly, none of the reproducibility issues we encountered appeared seriously consequential for the conclusions stated in the original articles. Nevertheless, non-reproducibility highlighted fundamental quality control and documentation failures during data management, data analysis, and reporting. Furthermore, the extensive time investment required to check and establish analytic reproducibility would likely be prohibitive for many researchers interested in re-using data. The findings are consistent with a previous study which found a similar rate of non-reproducibility and identified unclear, incomplete, or incorrect analysis reporting as a primary contributing factor [@hardwicke2018a]. Although the open badges scheme introduced at Psychological Science has been associated with an increase in data availability [@kidwell2016], the current findings suggest that additional efforts may be required in order to ensure analytic reproducibility.
-Although some reproducibility issues were resolved through involvement of original authors, relying on such assistance is not ideal for several reasons: (1) it substantially increases the workload and time investment, both for researchers attempting to re-use data and for original authors; (2) important details about and materials related to the study are more likely to be forgotten or misplaced over time, reducing the ability of authors to assist [@vines2014]; (3) authors may be unwilling or unable to respond, as was the case for three of the articles we examined. Author involvement highlighted that non-reproducibility was often caused by unclear, incomplete, or incorrect reporting of analytic procedures in the original papers, issues which could often be resolved through the provision of additional information or clarifications beyond what was previously reported. In other cases, authors informed us of errors in shared data files or analysis scripts, suggesting that at some stage the original data, analyses, and research report had become decoupled. For many issues, neither we nor the original authors could reproduce the target values and the causal locus of non-reproducibility remains unidentified; it was no longer possible to reconstruct the original analysis pipeline.
+
+Some reproducibility issues were resolved through involvement of original authors, however, relying on such assistance is not ideal for several reasons: (1) it substantially increases the workload and time investment, both for researchers attempting to re-use data and for original authors; (2) important details about and materials related to the study are more likely to be forgotten or misplaced over time, reducing the ability of authors to assist [@vines2014]; (3) authors may be unwilling or unable to respond, as was the case for three of the articles we examined. Author involvement highlighted that non-reproducibility was often caused by unclear, incomplete, or incorrect reporting of analytic procedures in the original papers, issues which could often be resolved through the provision of additional information or clarifications beyond what was previously reported. In other cases, authors informed us of errors in shared data files or analysis scripts, suggesting that at some stage the original data, analyses, and research report had become decoupled. For many issues, neither we nor the original authors could reproduce the target values and the causal locus of non-reproducibility remained unidentified; it was no longer possible to reconstruct the original analysis pipeline.
 
 This study has a number of important limitations and caveats. Most pertinently, generalizing the observed reproducibility rates to other articles requires some caution as several characteristics of our sample are likely to have had a positive impact on the reproducibility rate. We specifically selected a sample of articles for which data were already available and screened against several reusability criteria [@kidwell2016]. This is relevant because most psychology articles are not accompanied by raw data or analysis scripts at all [@hardwicke2018; @hardwicke2020a; @wicherts2006], and even when data is available, suboptimal management and documentation can complicate re-use [@hardwicke2018a]. Thus, most psychology articles would likely fail a reproducibility check before reaching the stage of the analysis pipeline at which we began our assessments.
 
@@ -313,7 +329,7 @@ Another potential target for policy intervention includes improving quality cont
 Although journal policy is potentially helpful for incentivisation and verification, the reproducibility of a scientific manuscript is fundamentally within the control of its authors. Fortunately, a variety of tools are now available that allow for the writing of entirely reproducible research reports in which data, analysis code, and research reports are intrinsically linked [e.g., @vuorre2020]. Detailed guidance on data sharing, data management, and analytic reproducibility is available to support psychological scientists seeking to improve these practices in their own research [@klein2018].  The present manuscript is an illustration of these practices in action (https://doi.org/10.24433/CO.6557927.v1). It should be noted that ensuring the reproducibility of a scientific manuscript requires a non-trivial time investment. Continued development of user-friendly tools that facilitate reproducibility and dedicated training may help to reduce this burden. Additionally, the costs of ensuring reproducibility could be offset by the benefits of improved workflow efficiency, error detection and mitigation, and potential for data re-use.
 
 ## Conclusion
-This study has highlighted that the analytic reproducibility of published psychology articles cannot be guaranteed. It is inevitable that some scientific manuscripts contain errors and imperfections, as researchers are only human and people make mistakes [@rouder2019]. However, most of the issues we encountered in this study were entirely avoidable. Data availability alone is insufficient; further action is required to ensure the analytic reproducibility of scientific manuscripts.
+Together with previous findings [@hardwicke2018a], this study has highlighted that the analytic reproducibility of published psychology articles cannot be guaranteed. It is inevitable that some scientific manuscripts contain errors and imperfections, as researchers are only human and people make mistakes [@rouder2019]. However, most of the issues we encountered in this study were entirely avoidable. Data availability alone is insufficient; further action is required to ensure the analytic reproducibility of scientific manuscripts.
 
 # Open practices statement
 
@@ -329,7 +345,7 @@ This work received no specific funding. TEH's contribution was enabled by a gene
 
 # Author contributions
 
-TEH and MCF designed the study. TEH, MB, KM, EH, MBN, BNP, BdM, BL, EJY, and MCF conducted reproducibility checks. TEH performed the data analysis. TEH and MCF wrote the manuscript. MBN provided feedback on the manuscript. All authors gave final approval for publication.
+TEH and MCF designed the study. TEH, MB, KM, EH, MBN, BNP, BdM, BL, EJY, and MCF conducted reproducibility checks. TEH performed the data analysis. TEH and MCF wrote the manuscript. MB & MBN provided feedback on the manuscript. All authors gave final approval for publication.
 
 # Acknowledgements
 
