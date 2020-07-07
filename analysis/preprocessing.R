@@ -37,7 +37,8 @@ data_values <- data_values %>%
 # Values that required eyeball checks (visual comparison) need special attention
 # In these cases, the reportedValue column contains either 'fig' if the values were examined in a figure, or a thresholded value, like p < .05
 
-# Firstly, we need to handle two cases (dataIDs 510 and 515) where there was an MATCH eyeball check and the obtained value is reported as a threshold because we had to extract the numbers from SPSS output
+# Firstly, we need to handle two cases (dataIDs 510 and 515) where there was a MATCH eyeball check and the obtained value is reported as a threshold because we had to extract the numbers from SPSS output
+# in these cases we know the obtained value was 0.001
 data_values <- data_values %>% 
   mutate(obtainedValue = case_when(
     dataID %in% c(510, 515) ~ "0.001", # make manual adjustment for these IDs
