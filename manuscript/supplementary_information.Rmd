@@ -54,7 +54,7 @@ The most serious consequence of non-reproducibility is that it undermines the cr
 
 Determining the causal locus of non-reproducibility was not straightforward because we often did not have access to comprehensive information about the original analysis process. Additionally, there is not necessarily a direct mapping between discrete causal loci and reproducibility issues; multiple numerical discrepancies could be attributable to a single cause or multiple causes. Sometimes the causal locus of non-reproducibility became apparent after discussions with the original authors, however, all classifications were made independently by our team.
 
-Comparisons between values were partly automated through the use of a custom R function (https://osf.io/teuzb/) that accounted for rounding errors by rounding new values to the same number of decimal places as old values prior to computing the percentage error and classifying the value as a match, minor discrepancy, or major discrepancy. Note that for `r data_values %>% filter(!is.na(eyeballCheck)) %>% nrow()` values reported relative to a threshold (e.g., p < 0.05) or embedded in figures, we could not directly calculate percentage error and it was necessary to ‘eyeball’ (i.e., visually compare side-by-side) the values to confirm a match.
+Comparisons between values were partly automated through the use of a custom R function (https://osf.io/teuzb/) that accounted for rounding errors by rounding reanalysis values to the same number of decimal places as original values prior to computing the percentage error and classifying the value as a match, minor discrepancy, or major discrepancy. Note that for `r data_values %>% filter(!is.na(eyeballCheck)) %>% nrow()` values reported relative to a threshold (e.g., p < 0.05) or embedded in figures, we could not directly calculate percentage error and it was necessary to ‘eyeball’ (i.e., visually compare side-by-side) the values to confirm a match.
 
 All team members had started or completed graduate level training in psychology and had experience conducting the types of data analyses typically found in an introductory psychology statistics textbook (e.g., Field et al., 2012). 
 
@@ -593,7 +593,7 @@ R Markdown report: https://perma.cc/SVH6-8EN6
 
 OSF/Github repository: https://osf.io/fam6g/
 
-Code Ocean reproducible analysis container: https://doi.org/10.24433/CO.8022934.v1
+Code Ocean reproducible analysis container: https://doi.org/10.24433/CO.8022934.v2
 
 Description: 
 
