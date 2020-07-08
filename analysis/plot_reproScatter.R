@@ -36,15 +36,3 @@ makeScatter <- function(thisData){
 scatterPlot <- makeScatter(scatterData_p) + # build the scatter plot
   scale_x_continuous(trans='log',breaks=c(0.001,0.01,0.05,0.10,0.40,0.70,1),labels=c("0.001","0.01","0.05","0.10","0.40","0.70","1"),limits = c(0.00079, 1),expand=c(0,0)) + # make x axis log scale
   scale_y_continuous(trans='log',breaks=c(0.001,0.01,0.05,0.10,0.40,0.70,1),labels=c("0.001","0.01","0.05","0.10","0.40","0.70","1"),limits = c(0.00079, 1),expand=c(0,0)) # make y axis log scale
-
-# 
-# scatterData_d <- data_values %>%
-#   filter(valueType %in% c('d', 'pes', 'phi'))
-# 
-# scatter_d <- makeScatter(scatterData_d) +
-#   scale_x_continuous(trans='log',breaks=c(0,0.01,0.2,0.5,1,3,8),labels=c("0","0.01", "0.2","0.5","1","3","8"),limits = c(0.01, 8.2),expand=c(0,0)) +
-#   scale_y_continuous(trans='log',breaks=c(0,0.01,0.2,0.5,1,3,8),labels=c("0","0.01", "0.2","0.5","1","3","8"),limits = c(0.01, 8.2),expand=c(0,0))
-
-# combine plots
-#scatterPlots <- ggarrange(scatter_p, scatter_d, labels = c("P-values", "Cohen's d"), hjust = -0.1,
-#                       common.legend = TRUE, legend = "bottom")
