@@ -63,7 +63,9 @@ mask              : no
 csl               : "apa7.csl"
 class             : "man"
 output            : 
-  papaja::apa6_word
+  papaja::apa6_pdf:
+    includes:
+        after_body: "supplementary_information.tex"
     
 ---
 
@@ -110,11 +112,11 @@ A minimum quality standard expected of all scientific manuscripts is that any re
 
 [^compRepro]: Computational reproducibility is often assessed by attempting to re-run original computational code and can therefore fail if original code is unavailable or non-functioning [e.g., @stodden2018; @obels2019]. By contrast, analytic reproducibility is assessed by attempting to repeat the original analysis procedures, which can involve implementing those procedures in new code if necessary [e.g., @hardwicke2018a; @minocher2020].
 
-Difficulty establishing the analytic reproducibility of research reports has been encountered in several scientific domains, including economics, political science, behavioural ecology, and psychology [@chang2015; @eubank2016; @stodden2018; @obels2019; @hardwicke2018a; @minocher2020; but see @naudet2018]. A preliminary obstacle for many such studies is that research data are typically unavailable [@hardwicke2018; @hardwicke2020a; @wicherts2006]. Even when data can be accessed, suboptimal management and inadequate documentation can complicate data reuse [@hardwicke2018a; @kidwell2016]. These failures to adequately preserve and share earlier stages of the research pipeline typically prevent downstream assessment of analytic reproducibility.
+Difficulty establishing the analytic reproducibility of research reports has been encountered in several scientific domains, including economics, political science, behavioural ecology, and psychology [@chang2015; @eubank2016; @stodden2018; @obels2019; @hardwicke2018a; @minocher2020; but see @naudet2018]. A preliminary obstacle for many such studies is that research data are typically unavailable [@hardwicke2018; @hardwicke2020a; @wicherts2006]. Even when data can be accessed, suboptimal data management and inadequate documentation can complicate data reuse [@hardwicke2018a; @kidwell2016]. These failures to adequately preserve and share earlier stages of the research pipeline typically prevent downstream assessment of analytic reproducibility.
 
 A previous study in the domain of psychology largely circumvented data availability issues by capitalizing on a mandatory data sharing policy introduced at the journal Cognition [@hardwicke2018a]. In a sample of 35 articles with available data that had already passed initial quality checks, 24 (69%) articles contained at least one value that could not be reproduced within a 10% margin of error. Reproducibility issues were resolved in 11 of the 24 articles after consultation with original authors yielded additional data or clarified analytic procedures. Ultimately, 64 of 1324 (5%) checked values could not be reproduced despite author involvement. Importantly, there were no clear indications that the reproducibility issues seriously undermined the conclusions of the original articles. Nevertheless, this study highlighted a number of quality control and research transparency issues, including suboptimal data management; unclear, incomplete, or incorrect analysis specification; and reporting errors.
 
-In the present study, we intended to investigate whether the findings of @hardwicke2018a extended to a corpus of Psychological Science articles that received an ‘open data badge’ to signal data availability. In order to focus specifically on the reproducibility of the analysis process rather than upstream data availability or management practices, we selected only articles that had reusable data according to a previous study [@kidwell2016]. The submission guidelines of Psychological Science specifically stated that authors could earn an open data badge for “making publicly available the digitally-shareable data necessary to reproduce the reported result.” [^psychsci1] Additionally, authors were asked to self-certify that they had provided “…sufficient information for an independent researcher to reproduce the reported results.” [^psychsci2] Thus, if this policy was operating as intended, all numbers presented in these articles should be independently reproducible. If not, we hoped to learn about causes of non-reproducibility in order to identify areas for improvement in journal policy and research practice.
+In the present study, we intended to investigate whether the findings of @hardwicke2018a extended to a corpus of Psychological Science articles that received an ‘open data badge’ to signal data availability. In order to focus specifically on the reproducibility of the analysis process rather than upstream data availability or data management practices, we selected only articles that had reusable data according to a previous study [@kidwell2016]. The submission guidelines of Psychological Science specifically stated that authors could earn an open data badge for “making publicly available the digitally-shareable data necessary to reproduce the reported result.” [^psychsci1] Additionally, authors were asked to self-certify that they had provided “…sufficient information for an independent researcher to reproduce the reported results.” [^psychsci2] Thus, if this policy was operating as intended, all numbers presented in these articles should be independently reproducible. If not, we hoped to learn about causes of non-reproducibility in order to identify areas for improvement in journal policy and research practice.
 
 [^psychsci1]: See https://perma.cc/SFV8-DAZ6 (originally retrieved 9th October, 2017).
 
@@ -130,7 +132,7 @@ We employed a retrospective non-comparative case-study design based on @hardwick
 
 [^percentError]: An important caveat of this measure should be noted: large percentage differences can occur when the absolute magnitude of values is small (and vice versa). Thus, when considering the consequences of non-reproducibility for individual cases, quantitative measures should be evaluated in the full context of our qualitative observations (Supplementary Information \@ref(vignettes)).
 
-We classified articles as ‘not fully reproducible’ (any major numerical discrepancies, decision errors, or insufficient information to proceed) or ‘reproducible’ (no numerical discrepancies or minor numerical discrepancies only) and noted whether author involvement was provided or not. We recorded the potential causal loci of non-reproducibility and judged the likelihood that non-reproducibility impacted conclusions drawn in the original articles. Team members provided a subjective estimate of the time they spent on each reproducibility check. Additional procedural details are available in Supplementary Information \@ref(sup_design).
+We classified articles as ‘not fully reproducible’ (any major numerical discrepancies, decision errors, or insufficient information to proceed) or ‘reproducible’ (no numerical discrepancies or minor numerical discrepancies only) and noted whether author involvement was provided or not. We recorded the potential causal loci of non-reproducibility and judged the likelihood that non-reproducibility impacted conclusions drawn in the original articles. Team members provided a subjective estimate of the time they spent on each reproducibility check. Additional design details are available in Supplementary Information \@ref(sup_design).
 
 ## Sample
 
@@ -181,7 +183,7 @@ To minimize error and facilitate reproducibility, each reproducibility check was
 
 ## Data analysis 
 
-The results can be considered at several layers of granularity. Detailed qualitative information about each reproducibility check is available in the individual reproducibility reports (https://osf.io/hf9jy/) and summarized in a short ‘vignette’ available in Supplementary Information \@ref(vignettes). We report descriptive and inferential statistics at the article-level and value-level. We report descriptive and inferential[^infStat] statistics at the article-level and value-level. Ninety-five per cent confidence intervals (CIs) are displayed in square brackets.
+The results can be considered at several layers of granularity. Detailed qualitative information about each reproducibility check is available in the individual reproducibility reports (https://osf.io/hf9jy/) and summarized in a short ‘vignette’ available in Supplementary Information \@ref(vignettes). We report descriptive and inferential[^infStat] statistics at the article-level and value-level. Ninety-five per cent confidence intervals (CIs) are displayed in square brackets.
 
 The present study is highly comparable in goal and design to a previous study (Hardwicke et al. 2018), creating an opportunity to synthesize their estimates of analytic reproducibility. To this end, we used random-effects models with inverse-variance weighting to meta-analyze the raw proportion estimates of article-level analytic reproducibility for the two studies, separately before and after original authors were contacted [@schwarzer2015].
 
@@ -352,9 +354,8 @@ We are grateful to the authors of the original articles for their assistance wit
 
 # References
 
-<div id = "refs"></div>
-
-```{r child = "supplementary_information.Rmd"}
+```{r render_appendix, include=FALSE}
+render_appendix("supplementary_information.Rmd")
 ```
 
 ```{r abstract_text, cache = TRUE}
