@@ -83,9 +83,9 @@ m <- metaprop(
 
 ## build forest plot
 
-pdf(file="forestPlot.pdf", width = 12, height = 6)
+#pdf(file="forestPlot.pdf", width = 12, height = 6)
 
-forestPlot <- forest(m, 
+forest(m, 
        leftlabs = c("Study", "Reproducible\ncases", "Total\ncases"),
        rightlabs = c("Proportion", "[95% CI]"),
        xlab = 'Proportion',
@@ -102,4 +102,4 @@ forestPlot <- forest(m,
        colgap.forest.left = unit(0.5, 'cm')
 )
 
-dev.off()
+#dev.off()

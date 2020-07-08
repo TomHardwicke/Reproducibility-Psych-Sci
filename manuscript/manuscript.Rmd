@@ -254,12 +254,8 @@ source(here('analysis','plot_reproScatter.R')) # build plot
 scatterPlot # show plot
 ```
 
-```{r}
+```{r fig.cap="Forest plot showing the proportion of articles with fully reproducible target outcomes in Hardwicke et al. (2018) and the present study before and after contacting original authors for assistance with reproducibility checks. Squares represent individual study proportions (with size proportional to meta-analytic weighting). Diamonds represent summary proportions estimated by random effects (RE) models. Error bars represent 95% confidence intervals (CIs).", fig.width=8, fig.path="figs/"}
 source(here('analysis','meta_analysis.R'))
-```
-
-```{r fig.cap="Forest plot showing the proportion of articles with fully reproducible target outcomes in Hardwicke et al. (2018) and the present study before and after contacting original authors for assistance with reproducibility checks. Squares represent individual study proportions (with size proportional to meta-analytic weighting). Diamonds represent summary proportions estimated by random effects (RE) models. Error bars represent 95% confidence intervals (CIs).", fig.path="figs/"}
-include_graphics(here('manuscript', 'figs', 'forestPlot.png'))
 ```
 
 ```{r}
