@@ -64,28 +64,28 @@ ma_data_post <- data.frame(
 ma_data_combined <- rbind(ma_data_pre, ma_data_post)
 
 ## run meta-analysis
-m <- metaprop(
-  data = ma_data_combined,
-  event = cases, 
-  n = total,
-  studlab = study,
-  method.ci = 'WSCC', # WSCC
-  comb.fixed = F,
-  comb.random = T,
+ma <- metaprop(
+  data = ma_data_combined, # specify data frame
+  event = cases, # specify column of reproducible cases
+  n = total, # specify column of total cases
+  studlab = study, # specify column of study identity
+  method.ci = 'WSCC', # compute Wilson confidence intervals
+  comb.fixed = F, # don't used fixed effects model
+  comb.random = T, # use random effects model
   sm = "PRAW", # specify summary measure as raw proportions
-  method = "Inverse",
-  byvar = type,
+  method = "Inverse", # use inverse-variance weighting method
+  byvar = type, # specify subgroup
   overall = F, # turn off overall summary statistic
   overall.hetstat = F, # turn of heterogeneity statistics
-  print.byvar = F
+  print.byvar = F # don't print subgroup label
 )
 
 
 ## build forest plot
 
-#pdf(file="forestPlot.pdf", width = 12, height = 6)
+#pdf(file="forestPlot.pdf", width = 12, height = 6) # only if saving to pdf
 
-forest(m, 
+forest(ma, # supply meta-analysis object from above
        leftlabs = c("Study", "Reproducible\ncases", "Total\ncases"),
        rightlabs = c("Proportion", "[95% CI]"),
        xlab = 'Proportion',
@@ -102,4 +102,4 @@ forest(m,
        colgap.forest.left = unit(0.5, 'cm')
 )
 
-#dev.off()
+#dev.off() # only if saving to pdf
