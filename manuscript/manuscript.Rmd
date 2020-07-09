@@ -41,10 +41,9 @@ affiliation:
   - id            : "6"
     institution   : "Department of Methodology and Statistics, Tilburg School of Social and Behavioral Sciences, Tilburg University"
        
-    
 note: ""
 
-author_note: >
+author_note: ""
   
 
 abstract: | 
@@ -61,13 +60,15 @@ footnotelist      : no
 lineno            : yes
 mask              : no
 csl               : "apa7.csl"
+
 class             : "man"
 output            : 
   papaja::apa6_pdf:
     includes:
         after_body: "supplementary_information.tex"
-    
+       
 ---
+
 
 ```{r load_packages}
 # load packages
@@ -132,7 +133,7 @@ We employed a retrospective non-comparative case-study design based on @hardwick
 
 [^percentError]: An important caveat of this measure should be noted: large percentage differences can occur when the absolute magnitude of values is small (and vice versa). Thus, when considering the consequences of non-reproducibility for individual cases, quantitative measures should be evaluated in the full context of our qualitative observations (Supplementary Information \@ref(vignettes)).
 
-We classified articles as ‘not fully reproducible’ (any major numerical discrepancies, decision errors, or insufficient information to proceed) or ‘reproducible’ (no numerical discrepancies or minor numerical discrepancies only) and noted whether author involvement was provided or not. We recorded the potential causal loci of non-reproducibility and judged the likelihood that non-reproducibility impacted conclusions drawn in the original articles. Team members provided a subjective estimate of the time they spent on each reproducibility check. Additional design details are available in Supplementary Information \@ref(sup_design).
+We classified articles as ‘not fully reproducible’ (any major numerical discrepancies, decision errors, or insufficient information to proceed) or ‘reproducible’ (no numerical discrepancies or minor numerical discrepancies only) and noted whether author involvement was provided or not. We recorded the potential causal loci of non-reproducibility and judged the likelihood that non-reproducibility impacted conclusions drawn in the original articles. Team members provided a subjective estimate of the time they spent on each reproducibility check. Additional design details are available in Supplementary Information \@ref(supdesign).
 
 ## Sample
 
@@ -171,15 +172,15 @@ data_kidwell_eligible <- data_kidwell_badge_reusable %>%
 totalArticles <- data_kidwell_eligible %>% nrow()
 ```
 
-The sample was based on a corpus of psychology articles that had been examined in a previous project investigating the impact of an “open badges” scheme introduced at Psychological Science [@kidwell2016]. This sample was selected because the open badges scheme and assessment of reusability by @kidwell2016 enabled us to largely circumvent upstream issues related to data availability and data management and instead focus on downstream issues related to analytic reproducibility. A precision analysis indicates that the sample size affords adequate precision for the purposes of gauging policy compliance (Supplementary Information \@ref(sup_sample)).
+The sample was based on a corpus of psychology articles that had been examined in a previous project investigating the impact of an “open badges” scheme introduced at Psychological Science [@kidwell2016]. This sample was selected because the open badges scheme and assessment of reusability by @kidwell2016 enabled us to largely circumvent upstream issues related to data availability and data management and instead focus on downstream issues related to analytic reproducibility. A precision analysis indicates that the sample size affords adequate precision for the purposes of gauging policy compliance (Supplementary Information \@ref(supsample)).
 
-Of `r data_kidwell_badge %>% nrow()` articles marked with an open data badge, Kidwell and colleagues had identified `r data_kidwell_badge_reusable %>% nrow()` with datasets that met four reusability criteria (accessible, correct, complete, and understandable). For each of these articles, one investigator (TEH) attempted to identify a coherent set of descriptive and inferential statistics (e.g., means, standard deviations, t-values, p-values; see Figure \@ref(fig:valueTypePlot)), roughly 2-3 paragraphs of text, sometimes including a table or figure, related to a ‘substantive’ finding based on ‘relatively straightforward’ analyses. We focused on substantive findings because they are the most important and straightforward analyses to ensure that our team had sufficient expertise to re-run them. In total, `r nrow(data_values)` discrete numerical values reported in `r totalArticles` articles published between January 2014 and May 2015 were designated as target values. Further information about the sample is available in Supplementary Information \@ref(sup_sample).
+Of `r data_kidwell_badge %>% nrow()` articles marked with an open data badge, Kidwell and colleagues had identified `r data_kidwell_badge_reusable %>% nrow()` with datasets that met four reusability criteria (accessible, correct, complete, and understandable). For each of these articles, one investigator (TEH) attempted to identify a coherent set of descriptive and inferential statistics (e.g., means, standard deviations, t-values, p-values; see Figure \@ref(fig:valueTypePlot)), roughly 2-3 paragraphs of text, sometimes including a table or figure, related to a ‘substantive’ finding based on ‘relatively straightforward’ analyses. We focused on substantive findings because they are the most important and straightforward analyses to ensure that our team had sufficient expertise to re-run them. In total, `r nrow(data_values)` discrete numerical values reported in `r totalArticles` articles published between January 2014 and May 2015 were designated as target values. Further information about the sample is available in Supplementary Information \@ref(supsample).
 
 ## Procedure
 
 The aim of the reproducibility checks was to recover the target original values by repeating the original analysis (as described in the original articles and any additional documentation such as supplementary materials, codebook, analysis scripts) upon the original data. Attempting alternative analyses was outside the scope of the study, even if the original analysis seemed sub-optimal or erroneous. 
 
-To minimize error and facilitate reproducibility, each reproducibility check was conducted by at least two team members who documented the reanalysis process in an R Markdown report (available at https://osf.io/hf9jy/). If articles were initially classified as not fully reproducible, we emailed the author(s) of the article and used any additional information they provided to try and resolve the issues before a final classification was determined. Additional procedural details are available in Supplementary Information \@ref(sup_design).
+To minimize error and facilitate reproducibility, each reproducibility check was conducted by at least two team members who documented the reanalysis process in an R Markdown report (available at https://osf.io/hf9jy/). If articles were initially classified as not fully reproducible, we emailed the author(s) of the article and used any additional information they provided to try and resolve the issues before a final classification was determined. Additional procedural details are available in Supplementary Information \@ref(supdesign).
 
 ## Data analysis 
 
@@ -254,12 +255,7 @@ data.frame("Target values fully reproducible?" = c("Yes", "Yes", "No", "No"),
                       "n (%[95%CI])"))
 ```
 
-```{r scatterPlot, fig.cap="Scatterplot showing reanalysis p-values as a function of original p-values, classified by reproducibility outcome. Axes are on a log scale. The diagonal line represents perfect consistency between reanalysis and original values. Dashed lines represent the typical alpha threshold (0.05) for statistical significance. Original values reported relative to thresholds (e.g., p < .05) are represented by the threshold value when there was a major discrepancy and represented by the reanalysis value when there was a match. For display purposes, 41 values below 0.001 are not shown.", fig.path="figs/"}
-source(here('analysis','plot_reproScatter.R')) # build plot
-scatterPlot # show plot
-```
-
-```{r fig.cap="Forest plot showing the proportion of articles with fully reproducible target values in Hardwicke et al. (2018) and the present study before and after contacting original authors for assistance with reproducibility checks. Squares represent individual study proportions (with size proportional to meta-analytic weighting). Diamonds represent summary proportions estimated by random effects (RE) models. Error bars represent 95% confidence intervals (CIs).", fig.width=8, fig.path="figs/"}
+```{r forestPlot, fig.cap="Forest plot showing the proportion of articles with fully reproducible target values in Hardwicke et al. (2018) and the present study before and after contacting original authors for assistance with reproducibility checks. Squares represent individual study proportions (with size proportional to meta-analytic weighting). Diamonds represent summary proportions estimated by random effects (RE) models. Error bars represent 95% confidence intervals (CIs).", fig.width=8, fig.path="figs/"}
 source(here('analysis','meta_analysis.R'))
 ```
 
@@ -290,6 +286,11 @@ majorErrors_percent <- round(majorErrors/valuesChecked*100,0) # calculate percen
 majorErrors_percentCI <- propCI(majorErrors,valuesChecked) # calculate CIs
 ```
 
+```{r scatterPlot, fig.cap="Scatterplot showing reanalysis p-values as a function of original p-values, classified by reproducibility outcome. Axes are on a log scale. The diagonal line represents perfect consistency between reanalysis and original values. Dashed lines represent the typical alpha threshold (0.05) for statistical significance. Original values reported relative to thresholds (e.g., p < .05) are represented by the threshold value when there was a major discrepancy and represented by the reanalysis value when there was a match. For display purposes, 41 values below 0.001 are not shown.", fig.path="figs/"}
+source(here('analysis','plot_reproScatter.R')) # build plot
+scatterPlot # show plot
+```
+
 After author involvement, `r majorErrors` major numerical discrepancies remained amongst the `r valuesChecked` target values examined across all articles (`r paste0(majorErrors_percent,'% ',majorErrors_percentCI)`). This included `r decisionErrors` decision error for which we obtained a statically significant p value of `r data_values %>% filter(comparisonOutcome =='DECISION_ERROR') %>% pull(obtainedValue)` in contrast to the reported non-significant p-value of `r data_values %>% filter(comparisonOutcome =='DECISION_ERROR') %>% pull(reportedValue)`. A scatterplot illustrating the consistency of original and reanalysis p-values is displayed in Figure \@ref(fig:scatterPlot). The frequency of numerical discrepancies by value types is displayed in Figure \@ref(fig:valueTypePlot).
 
 ```{r valueTypePlot, fig.cap="Frequency of reproducibility outcomes by value type. Variation/uncertainty measures include standard deviations, standard errors, and confidence intervals. Effect sizes include Cohen's d, Person's r, partial eta squared, and phi. Test statistics include t, F, and chi squared. Central tendency measures include means and medians.", fig.path="figs/"}
@@ -309,7 +310,7 @@ timeSummary <- data_articles %>%
   mutate(activeTTC = (pilotTTC + copilotTTC)/60) %>%
   summarise(median = median(activeTTC), IQR = round(IQR(activeTTC)), min = round(min(activeTTC)), max = round(max(activeTTC)), total = round(sum(activeTTC)))
 ```
-Team members provided concurrent estimates of their time spent on each stage of the analysis. Altogether, they estimated that they spent between `r timeSummary %>% pull(min)` and `r timeSummary %>% pull(max)` (median = `r timeSummary %>% pull(median)`, interquartile range = `r timeSummary %>% pull(IQR)`) hours actively working on each reproducibility check (Supplementary Figure \@ref(fig:timePlot); total time = `r timeSummary %>% pull(total)` hours). This estimate excludes time spent waiting on internal (within our team) and external (with original authors) communications. Availability of original analysis scripts appeared to provide some modest benefits in terms of reproducibility outcomes and time expenditure (see Supplementary Information \@ref(sup_results)).
+Team members provided concurrent estimates of their time spent on each stage of the analysis. Altogether, they estimated that they spent between `r timeSummary %>% pull(min)` and `r timeSummary %>% pull(max)` (median = `r timeSummary %>% pull(median)`, interquartile range = `r timeSummary %>% pull(IQR)`) hours actively working on each reproducibility check (Supplementary Figure \@ref(fig:timePlot); total time = `r timeSummary %>% pull(total)` hours). This estimate excludes time spent waiting on internal (within our team) and external (with original authors) communications. Availability of original analysis scripts appeared to provide some modest benefits in terms of reproducibility outcomes and time expenditure (see Supplementary Information \@ref(supresults)).
 
 # Discussion
 
