@@ -1,4 +1,10 @@
 base
+methods
+datasets
+utils
+grDevices
+graphics
+stats
 knitr
 papaja
 tidyverse
@@ -14,3 +20,5 @@ tidylog
 here
 DescTools
 english
+meta
+osfr
