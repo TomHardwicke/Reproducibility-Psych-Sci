@@ -1,4 +1,4 @@
-# Supplementary design and procedures information {#sup_design}
+# Supplementary design and procedures information {#supdesign}
 
 The most serious consequence of non-reproducibility is that it undermines the credibility of associated scientific claims. We therefore attempted to determine the extent to which any reproducibility issues we encountered had substantial implications for related conclusions drawn in the original papers. As noted in a previous investigation (Hardwicke et al., 2018), this is a complex issue that cannot be straightforwardly measured by a quantitative index. We therefore, considered this question on a case by case basis, using multiple factors to inform our judgement, including the presence/absence of decision errors, the quantity of and type of target values that could not be reproduced, the difference in magnitude of key values like effect sizes, and the specificity of the hypothesis under scrutiny. This was a necessarily subjective exercise; however the judgement for each reproducibility check was agreed upon by the (two or more) team members who worked on it in addition to the first author (TEH) and senior author (MCF). The rationale underlying each judgement is outlined in the reproducibility vignettes in Supplementary Information \@ref(vignettes).
 
@@ -10,7 +10,7 @@ All team members had started or completed graduate level training in psychology 
 
 In the first contact emails we sent to original authors, we explained the project, the issues we had encountered with their article, and provided a copy of an interim reproducibility report. If we were notified that the email was not delivered, we spent up to 5 minutes searching for a more recent contact email address. If the corresponding author(s) did not respond after two weeks, a reminder email was sent.
 
-# Supplementary sample information {#sup_sample}
+# Supplementary sample information {#supsample}
 
 ```{r}
 # formula for margin of error (MOE) calculation (95% confidence interval assumed)
@@ -60,7 +60,7 @@ A precision analysis (not pre-registered and performed after study completion) s
 precisionCurvePlot
 ```
 
-# Supplementary results {#sup_results}
+# Supplementary results {#supresults}
 
 Ninety-five per cent confidence intervals (CIs) displayed in square brackets are based on the Wilson method with continuity correction for binomial proportions [@newcombe1998] and the Sison–Glaz method for multinomial proportions [@sison1995]. 
 
@@ -601,5 +601,5 @@ We were initially able to reproduce the descriptive statistics and the three key
 
 However, we continued to have difficulties with the section reporting post-hoc comparisons. There were three major numerical discrepancies for p-values. The authors report using 'Sidak corrections' but it is unclear if they were applied to the alpha threshold (correctly) or the p-values themselves. If corrections were applied to the p values, then this could potentially explain the differences, but the article does not identify the family of hypotheses for which corrections were applied. So we also cannot correct the alpha threshold. We have decided to report the major numerical discrepancies for the p values, but also record an insufficient information error as we cannot determine whether these were decision errors or not. Additionally, for one degree of freedom, we obtained 4 whereas the article reports 3. This may be a typo but the cause is not clear.
 
-# Supplementary information references {#sup_refs}
+# Supplementary information references {#suprefs}
  
