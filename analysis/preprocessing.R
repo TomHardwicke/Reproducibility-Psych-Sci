@@ -5,7 +5,7 @@
 # There's no need to run this code as are going to work with a local copy to ensure internal reproducibility (e.g., to protect against the file being lost at the original source)
 # osfFile <- osf_retrieve_file("https://osf.io/hvytz/") %>%
 #   osf_download(path = 'data/raw/')
-data_hardwicke2018 <- read_csv(here("data", "raw", "Hardwicke2018_Data.csv"))
+data_hardwicke2018 <- read_csv(here("data", "raw", "Hardwicke2018_data.csv"))
 
 # load data from Kidwell et al. 2016
 # NB - the OSF code below can be used to download the original data file directly from the authors' OSF repository
