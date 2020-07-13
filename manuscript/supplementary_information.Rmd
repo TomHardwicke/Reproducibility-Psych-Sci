@@ -335,7 +335,7 @@ Outcome: Reproducible (without author involvement)
 
 Substantial implications for the original conclusions: N/A
 
-R Markdown report: https://perma.cc/K5LB-WD45s
+R Markdown report: https://perma.cc/K5LB-WD45
 
 OSF/Github repository: https://osf.io/hz8mn/
 
