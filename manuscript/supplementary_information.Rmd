@@ -241,7 +241,7 @@ Description:
 
 This reproducibility check was largely a success. There were some difficulties mapping the reported analyses to the variable names in the data file, however these were eventually resolved with a bit of guesswork.
 
-There was one major numerical discrepancy where a p value was reported as = .001 but we obtained 3.695211e-13. It seems very likely the intention was to report p <.001 as the reported t-value is consistent with this significance level (the authors have confirmed over email that it was probably a typo). This single observed discrepancy is unlikely to be consequential for the article's original conclusions.
+There was one major numerical discrepancy where a p-value was reported as = .001 but we obtained 3.695211e-13. It seems very likely the intention was to report p <.001 as the reported t-value is consistent with this significance level (the authors have confirmed over email that it was probably a typo). This single observed discrepancy is unlikely to be consequential for the article's original conclusions.
 
 ## Vignette 5 (article 11-12-2014_PS)
 
@@ -397,7 +397,7 @@ Description:
 
 Whilst trying to reproduce an ANOVA we noted that two participants (participant 25 for both the Moroccan and Spaniard samples) had missing data for the PAST condition. However, the degrees of freedom reported in the paper appeared to reflect that the participants *were* included in this analysis. We asked the original authors for clarification and they informed us that there were typos in the data file they had posted on OSF. The wrong participant ID had been added for some lines of data, making it appear that two participants were missing data. Once the typos were corrected, the degrees of freedom in our re-analyses matched those reported in the paper. 
 
-Two major numerical discrepancies with p-values remained. In both cases, the authors reported that p = .001, but the values we obtained were lower than this. We discussed this issue with the authors and they said that it is their policy to report p values that are <.001 as p = .001. Unfortunately this approach guarantees inaccurate reporting. According to the APA, researchers should "report p values less than .001 as p < .001" (APA, 2009; p. 114). The reproducibility issues we encountered do not appear to undermine the conclusions drawn in the original article. 
+Two major numerical discrepancies with p-values remained. In both cases, the authors reported that p = .001, but the values we obtained were lower than this. We discussed this issue with the authors and they said that it is their policy to report p-values that are <.001 as p = .001. Unfortunately this approach guarantees inaccurate reporting. According to the APA, researchers should "report p-values less than .001 as p < .001" (APA, 2009; p. 114). The reproducibility issues we encountered do not appear to undermine the conclusions drawn in the original article. 
 
 ## Vignette 14 (article 4-1-2015_PS)
 
@@ -599,7 +599,7 @@ Description:
 
 We were initially able to reproduce the descriptive statistics and the three key figures. But there were four insufficient information errors pertaining to the original analysis specifications that prevented a full reproducibility check (see reproducibility report for details). We contacted the original authors for assistance and they clarified some aspects of the analyses which resolved some issues.
 
-However, we continued to have difficulties with the section reporting post-hoc comparisons. There were three major numerical discrepancies for p-values. The authors report using 'Sidak corrections' but it is unclear if they were applied to the alpha threshold (correctly) or the p-values themselves. If corrections were applied to the p values, then this could potentially explain the differences, but the article does not identify the family of hypotheses for which corrections were applied. So we also cannot correct the alpha threshold. We have decided to report the major numerical discrepancies for the p values, but also record an insufficient information error as we cannot determine whether these were decision errors or not. Additionally, for one degree of freedom, we obtained 4 whereas the article reports 3. This may be a typo but the cause is not clear.
+However, we continued to have difficulties with the section reporting post-hoc comparisons. There were three major numerical discrepancies for p-values. The authors report using 'Sidak corrections' but it is unclear if they were applied to the alpha threshold (correctly) or the p-values themselves. If corrections were applied to the p-values, then this could potentially explain the differences, but the article does not identify the family of hypotheses for which corrections were applied. So we also cannot correct the alpha threshold. We have decided to report the major numerical discrepancies for the p-values, but also record an insufficient information error as we cannot determine whether these were decision errors or not. Additionally, for one degree of freedom, we obtained 4 whereas the article reports 3. This may be a typo but the cause is not clear.
 
 # Supplementary information references {#suprefs}
  
