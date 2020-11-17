@@ -72,7 +72,31 @@ data_values <- data_values %>%
     obtainedValue = as.numeric(obtainedValue),
     comparisonOutcome = factor(comparisonOutcome))
 
-# Relabel 'eyeball errors' as major errors
+# Relabel p-value 'eyeball errors' that were decision errors as decision errors
+# First identify cases where >= .05 was reported bu <.05 was obtained
+pEyeballDecisionError <- data_values %>%
+  filter(valueType == 'p', comparisonOutcome == 'EYEBALL_ERROR',
+         reportedValue >= .05, obtainedValue <.05) %>% 
+  # leave out these two data IDs because they are from a case (3-10-2014) where the alpha threshold could not be determined (see Vignette 25)
+  filter(dataID %notin% c(786,788)) %>%
+  pull(dataID)
+  
+# Now identify cases where < .0 was reported bu <.05 was obtained
+pEyeballDecisionError2 <- data_values %>%
+  filter(valueType == 'p', comparisonOutcome == 'EYEBALL_ERROR',
+         reportedValue < .05, obtainedValue >=.05) %>%
+  pull(dataID)
+
+# combine the two types of decision error
+pEyeballDecisionError <- c(pEyeballDecisionError,pEyeballDecisionError2)
+
+# now do the relabeling
+data_values <- data_values %>%
+  mutate(comparisonOutcome = replace(
+    comparisonOutcome,dataID %in% pEyeballDecisionError,"DECISION_ERROR"
+  ))
+
+# Relabel other 'eyeball errors' as major errors
 data_values <- data_values %>%
   mutate(comparisonOutcome =
            fct_collapse(comparisonOutcome, 
@@ -135,6 +159,3 @@ save(data_values, file = here('data', 'processed', 'data_values.RData'))
 save(data_articles, file = here('data', 'processed', 'data_articles.RData'))
 save(data_kidwell, file = here('data', 'processed', 'data_kidwell.RData'))
 save(data_hardwicke2018, file = here('data', 'processed', 'data_hardwicke2018.RData'))
-
-# Tidy up
-rm(list = ls()) # remove all objects from the R environment
