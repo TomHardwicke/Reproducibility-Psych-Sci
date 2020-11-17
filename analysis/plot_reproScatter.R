@@ -26,7 +26,7 @@ makeScatter <- function(thisData){
           panel.grid.major = element_blank(), # remove minor gridlines
           panel.background = element_rect(fill = "white", colour = "black", size = 1)) + # plot background (white) and border (black)
     scale_shape_manual(name = 'reproducibility\noutcome', # set name in legend
-                       values = c(4,1,2,8), # choose shapes 
+                       values = c(3,1,2,5), # choose shapes 
                        labels = c("Match", "Minor discrepancy", "Major discrepancy", "Decision error")) + # shape labels
     ylab('reanalysis p-value') + # add y axis label
     xlab('original p-value') + # add x axis label

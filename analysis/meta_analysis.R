@@ -89,7 +89,7 @@ forest(ma, # supply meta-analysis object from above
        leftlabs = c("Study", "Reproducible\ncases", "Total\ncases"),
        rightlabs = c("Proportion", "[95% CI]"),
        xlab = 'Proportion',
-       xlim = c(0,0.8),
+       xlim = c(0,1),
        col.square = 'black',
        col.diamond = 'black',
        col.by = 'black',
