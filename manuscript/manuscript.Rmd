@@ -1,12 +1,12 @@
 ---
-title             : "Analytic reproducibility in articles receiving open data badges at Psychological Science: An observational study"
+title             : "Analytic reproducibility in articles receiving open data badges at the journal Psychological Science: An observational study"
 shorttitle        : "Analytic reproducibility"
 
 author: 
   - name          : "Tom E. Hardwicke"
     affiliation   : "1,2"
     corresponding : yes    # Define only one corresponding author
-    address       : "Nieuwe Achtergracht 129B, Department of Psychology, University of Amsterdam, 1018 WT Amsterdam, The Netherlands"
+    address       : "Nieuwe Achtergracht 129B, Department of Psychology, University of Amsterdam, Amsterdam, The Netherlands"
     email         : "tom.hardwicke@uva.nl"
   - name          : "Manuel Bohn"
     affiliation   : "3"
@@ -70,7 +70,7 @@ output            :
 ---
 
 
-```{r load_packages}
+```{r load_packages, warning=FALSE}
 # load packages
 library(knitr) # for literate programming
 library(papaja) # for article template
@@ -84,20 +84,20 @@ library(osfr) # to download data from the Open Science Framework (for meta-analy
 ```
 ```{r load_functions}
 # load functions for calculating confidence intervals and performing min-max normalization
-source(here('analysis','functions.R'))
+source(here("analysis", "functions.R"))
 ```
 
 ```{r perform_preprocessing}
 # loads the raw data and performs preprocessing. Saves preprocessed files.
-source(here('analysis','preprocessing.R'))
+source(here("analysis", "preprocessing.R"))
 ```
 
 ```{r load_data}
 # loads the processed data files output by the preprocessing performed above
-load(here('data', 'processed', 'data_values.RData')) # load value-level data
-load(here('data', 'processed', 'data_articles.RData')) # load article-level data
-load(here('data', 'processed', 'data_kidwell.RData')) # load kidwell2016 data
-load(here('data', 'processed', 'data_hardwicke2018.RData')) # load hardwicke2018 data
+load(here("data", "processed", "data_values.RData")) # load value-level data
+load(here("data", "processed", "data_articles.RData")) # load article-level data
+load(here("data", "processed", "data_kidwell.RData")) # load kidwell2016 data
+load(here("data", "processed", "data_hardwicke2018.RData")) # load hardwicke2018 data
 ```
 
 ```{r}
@@ -141,15 +141,19 @@ We classified articles as ‘not fully reproducible’ (any major numerical disc
 
 # select only Psychological Science articles that recieved an open data badge
 data_kidwell_badge <- data_kidwell %>%
-  filter(Journal == 'PS',
-         `Did the article receive a badge for open data?` == "Yes")
+  filter(
+    Journal == "PS",
+    `Did the article receive a badge for open data?` == "Yes"
+  )
 
 # select only badged articles that had available, correct, complete, and understandable data
-data_kidwell_badge_reusable <- data_kidwell_badge %>% 
-  filter(`Are the data located at the working page?` == "Yes",
-         `Does the data correspond to what is reported in the article?` == "Yes",
-         `Are the data complete?` == "Yes, all of the data appear to be available",
-         `Are the data understandable and usable after brief review?` == "Yes")
+data_kidwell_badge_reusable <- data_kidwell_badge %>%
+  filter(
+    `Are the data located at the working page?` == "Yes",
+    `Does the data correspond to what is reported in the article?` == "Yes",
+    `Are the data complete?` == "Yes, all of the data appear to be available",
+    `Are the data understandable and usable after brief review?` == "Yes"
+  )
 
 # identify articles for which we could identify a 'straightforward and substantive finding'
 includedArticles <- c("1-1-2015 PS", "1-6-2014 PS", "3-4-2015 PS", "3-9-2014 PS", "3-10-2014 PS", "4-1-2015 PS", "4-11-2014 PS", "5-4-2015 PS", "6-1-2015 PS", "6-7-2014 PS", "7-3-2015 PS", "8-7-2014 PS", "8-8-2014 PS", "9-2-2015 PS", "9-5-2014 PS", "10-7-2014 PS", "11-11-2014 PS", "11-12-2014 PS", "16-11-2014 PS", "2-2-2015 PS", "8-5-2015 PS", "8-12-2014 PS", "23-2-2014 PS", "2-10-2014 PS", "16-9-2014 PS")
@@ -197,64 +201,82 @@ articleLevelSummary <- data_articles %>%
   count(finalOutcome) %>%
   mutate(totalN = sum(n)) %>%
   cbind(MultinomCI(.$n, # add CIs
-           conf.level=0.95,
-           method="sisonglaz")) %>%
-  mutate(percent = round(est*100, 0), # calculate percentage
-         percentCI = paste0('[', round(lwr.ci*100, 0),', ', round(upr.ci*100, 0), ']'), # format CIs
-         fullReport = paste0(n,' (',percent,'%, CI ', percentCI, ')')) # format reporting string
+    conf.level = 0.95,
+    method = "sisonglaz"
+  )) %>%
+  mutate(
+    percent = round(est * 100, 0), # calculate percentage
+    percentCI = paste0("[", round(lwr.ci * 100, 0), ", ", round(upr.ci * 100, 0), "]"), # format CIs
+    fullReport = paste0(n, " (", percent, "%, CI ", percentCI, ")")
+  ) # format reporting string
 
-# summarise the data 
+# summarise the data
 reproBefore <- data_articles %>%
   count(reproOutcomeBeforeAssistance) %>%
   rowwise() %>%
-  mutate(percent = paste0((n/totalArticles)*100,'%, ', # add percentages
-                          propCI(n,totalArticles))) %>% # add CIs
+  mutate(percent = paste0(
+    (n / totalArticles) * 100, "%, ", # add percentages
+    propCI(n, totalArticles)
+  )) %>% # add CIs
   rename(reproOutcome = reproOutcomeBeforeAssistance)
 
 reproAfter <- data_articles %>%
   count(reproOutcomeAfterAssistance) %>%
   rowwise() %>%
-  mutate(percent = paste0((n/totalArticles)*100,'%, ', # add percentages
-                          propCI(n,totalArticles))) %>% # add CIs
+  mutate(percent = paste0(
+    (n / totalArticles) * 100, "%, ", # add percentages
+    propCI(n, totalArticles)
+  )) %>% # add CIs
   rename(reproOutcome = reproOutcomeAfterAssistance)
 ```
 
 ```{r}
 # prepare information on insufficent information errors for reporting inline
-insuffInfoErrors <- data_articles %>% filter(Insufficient_Information_Errors > 0) %>% nrow() # how many articles had at least 1 insufficient information error
-insuffInfoErrors_percent <- insuffInfoErrors/totalArticles*100 # calculate percent
-insuffInfoErrors_CIs <- propCI(insuffInfoErrors,totalArticles) # caluclate CIs
+insuffInfoErrors <- data_articles %>%
+  filter(Insufficient_Information_Errors > 0) %>%
+  nrow() # how many articles had at least 1 insufficient information error
+insuffInfoErrors_percent <- insuffInfoErrors / totalArticles * 100 # calculate percent
+insuffInfoErrors_CIs <- propCI(insuffInfoErrors, totalArticles) # caluclate CIs
 
 # prepare information on no author response
-noResponse <- data_articles %>% filter(finalOutcome == 'Not reproducible\nwithout author\ninvolvement') %>% nrow()
+noResponse <- data_articles %>%
+  filter(finalOutcome == "Not reproducible\nwithout author\ninvolvement") %>%
+  nrow()
 ```
 Prior to seeking original author involvement, all target values in `r reproBefore %>% filter(reproOutcome == T) %>% pull(n)` out of the `r totalArticles` articles (`r reproBefore %>% filter(reproOutcome == T) %>% pull(percent)`) were reproducible, with the remaining `r reproBefore %>% filter(reproOutcome == F) %>% pull(n)` articles (`r reproBefore %>% filter(reproOutcome == F) %>% pull(percent)`) containing at least one major numerical discrepancy. After requesting input from original authors, several issues were resolved through the provision of additional information and ultimately all target values in `r reproAfter %>% filter(reproOutcome == T) %>% pull(n)` (`r reproAfter %>% filter(reproOutcome == T) %>% pull(percent)`) articles were reproducible, with the remaining `r reproAfter %>% filter(reproOutcome == F) %>% pull(n)` (`r reproAfter %>% filter(reproOutcome == F) %>% pull(percent)`) articles containing at least one major numerical discrepancy. In all except one case author input involved provision of additional information that was not included in the original article or clarification of original information that was ambiguous or incomplete. In the exception case (4-1-2015_PS), the authors pointed out that we had missed a relevant footnote in the original article. In `r as.english(noResponse)` cases authors did not respond and in `r as.english(insuffInfoErrors)` cases there was insufficient information to proceed with the reanalysis. The full breakdown of reproducibility outcomes after author contact are shown in Table \@ref(tab:reproTab) and the results of a meta-analysis synthesizing the findings with those of a previous study [@hardwicke2018a] are displayed in Figure \@ref(fig:forestPlot). In no cases did the observed numerical discrepancies appear to be consequential for the conclusions stated in the original articles (see Supplementary Information \@ref(vignettes)).
 
 
 ```{r reproTab}
-data.frame("Target values fully reproducible?" = c("Yes", "Yes", "No", "No"),
-           "Original author involvement?" = c("Yes", "No", "Yes", "No"),
-           "n (%[95%CI])" = c(
-             articleLevelSummary %>% 
-               filter(finalOutcome == 'Reproducible\nwithout author\ninvolvement') %>%
-               pull(fullReport),
-             articleLevelSummary %>% 
-               filter(finalOutcome == 'Reproducible\nwith author\ninvolvement') %>%
-               pull(fullReport),
-             articleLevelSummary %>% 
-               filter(finalOutcome == 'Not reproducible\nwith author\ninvolvement') %>%
-               pull(fullReport),
-             articleLevelSummary %>% 
-               filter(finalOutcome == 'Not reproducible\nwithout author\ninvolvement') %>%
-               pull(fullReport))) %>% 
-  kable(caption = "Final outcomes of reproducibility checks at the article level after original authors were contacted. Note that although one confidence interval technically includes 0, we are confident that 0 is not a possible population proportion due to the existence of non-reproducible cases that we document here.", align = 'l', 
-        col.names = c("Target values fully reproducible?",
-                      "Original author involvement?",
-                      "n (%[95%CI])"))
+data.frame(
+  "Target values fully reproducible?" = c("Yes", "Yes", "No", "No"),
+  "Original author involvement?" = c("Yes", "No", "Yes", "No"),
+  "n (%[95%CI])" = c(
+    articleLevelSummary %>%
+      filter(finalOutcome == "Reproducible\nwith author\ninvolvement") %>%
+      pull(fullReport),
+    articleLevelSummary %>%
+      filter(finalOutcome == "Reproducible\nwithout author\ninvolvement") %>%
+      pull(fullReport),
+    articleLevelSummary %>%
+      filter(finalOutcome == "Not reproducible\nwith author\ninvolvement") %>%
+      pull(fullReport),
+    articleLevelSummary %>%
+      filter(finalOutcome == "Not reproducible\nwithout author\ninvolvement") %>%
+      pull(fullReport)
+  )
+) %>%
+  kable(
+    caption = "Final outcomes of reproducibility checks at the article level after original authors were contacted. Note that although one confidence interval technically includes 0, we are confident that 0 is not a possible population proportion due to the existence of non-reproducible cases that we document here.", align = "l",
+    col.names = c(
+      "Target values fully reproducible?",
+      "Original author involvement?",
+      "n (%[95%CI])"
+    )
+  )
 ```
 
 ```{r forestPlot, fig.cap="Forest plot showing the proportion of articles with fully reproducible target values in Hardwicke et al. (2018) and the present study before and after contacting original authors for assistance with reproducibility checks. Squares represent individual study proportions. Diamonds represent summary proportions estimated by random effects (RE) models. Error bars represent 95% confidence intervals (CIs).", fig.width=8, fig.path="figs/"}
-source(here('analysis','meta_analysis.R'))
+source(here("analysis", "meta_analysis.R"))
 ```
 
 ```{r}
@@ -264,45 +286,49 @@ valuesChecked <- nrow(data_values) # total number of values checked
 reproOutcomeSummary <- data_values %>%
   count(comparisonOutcome) # caluclate frequency of different error types
 
-minorErrors <- reproOutcomeSummary %>% 
+minorErrors <- reproOutcomeSummary %>%
   filter(comparisonOutcome == "MINOR NUMERICAL DISCREPANCY") %>%
   pull(n) # extract info on minor discrepancies
 
-majorErrors <- reproOutcomeSummary %>% 
+majorErrors <- reproOutcomeSummary %>%
   filter(comparisonOutcome == "MAJOR NUMERICAL DISCREPANCY") %>%
   pull(n) # extract info on major discrepancies
 
-decisionErrors <- data_values %>% 
+decisionErrors <- data_values %>%
   filter(comparisonOutcome == "DECISION_ERROR") %>%
   nrow() # extract info on decision errors
 
-decisionErrors_sig <- data_values %>% 
-  filter(comparisonOutcome == "DECISION_ERROR",
-         reportedValue >= .05) %>%
+decisionErrors_sig <- data_values %>%
+  filter(
+    comparisonOutcome == "DECISION_ERROR",
+    reportedValue >= .05
+  ) %>%
   nrow() # extract info on decision errors where reported value was statistically significant
 
-decisionErrors_nonsig <- data_values %>% 
-  filter(comparisonOutcome == "DECISION_ERROR",
-         reportedValue < .05) %>%
+decisionErrors_nonsig <- data_values %>%
+  filter(
+    comparisonOutcome == "DECISION_ERROR",
+    reportedValue < .05
+  ) %>%
   nrow() # extract info on decision errors where reported value was not statistically significant
 
-# here we are adding decision errors to major errors 
+# here we are adding decision errors to major errors
 # (because they also count as major errors)
 majorErrors <- majorErrors + decisionErrors
 
-majorErrors_percent <- round(majorErrors/valuesChecked*100,0) # calculate percent 
-majorErrors_percentCI <- propCI(majorErrors,valuesChecked) # calculate CIs
+majorErrors_percent <- round(majorErrors / valuesChecked * 100, 0) # calculate percent
+majorErrors_percentCI <- propCI(majorErrors, valuesChecked) # calculate CIs
 ```
 
 ```{r scatterPlot, fig.cap="Scatterplot showing reanalysis p-values as a function of original p-values, classified by reproducibility outcome. Axes are on a log scale. The diagonal line represents perfect consistency between reanalysis and original values. Dashed lines represent the typical alpha threshold (0.05) for statistical significance. Original values reported relative to thresholds (e.g., p < .05) are represented by the threshold value when there was a major discrepancy and represented by the reanalysis value when there was a match. For display purposes, 41 values below 0.001 are not shown. Note that the two values in the bottom right quadrant of the graph have been conservatively designated as ‘major errors’ rather than ‘decision errors’ due to uncertainty about how the original analysis was performed. Specifically, insufficient information was provided in the original article (ID 9-5-2014_PS) about how multiplicity corrections were applied (see Vignette 25 in Supplementary Information E for further information).", fig.path="figs/"}
-source(here('analysis','plot_reproScatter.R')) # build plot
+source(here("analysis", "plot_reproScatter.R")) # build plot
 scatterPlot # show plot
 ```
 
 After author involvement, `r majorErrors` major numerical discrepancies remained amongst the `r valuesChecked` target values examined across all articles (`r paste0(majorErrors_percent,'% ',majorErrors_percentCI)`). This included `r decisionErrors_sig` decision errors for which we obtained a statically significant p-value in contrast to a reported non-significant p-value and `r decisionErrors_nonsig` decision error with the opposite pattern. A scatterplot illustrating the consistency of original and reanalysis p-values is displayed in Figure \@ref(fig:scatterPlot). The frequency of numerical discrepancies by value types is displayed in Figure \@ref(fig:valueTypePlot).
 
 ```{r valueTypePlot, fig.cap="Frequency of reproducibility outcomes by value type. Variation/uncertainty measures include standard deviations, standard errors, and confidence intervals. Effect sizes include Cohen's d, Pearson's r, partial eta squared, and phi. Test statistics include t, F, and chi squared. Central tendency measures include means and medians.", fig.path="figs/"}
-source(here('analysis', 'plot_valueType.R')) # build plot
+source(here("analysis", "plot_valueType.R")) # build plot
 valueTypePlot # show plot
 ```
 
@@ -311,11 +337,11 @@ Where possible we attempted to identify the causal locus of the reproducibility 
 ```{r}
 # calcualte summary statistics for time to complete
 timeSummary <- data_articles %>%
-  mutate(activeTTC = (pilotTTC + copilotTTC)/60) %>%
+  mutate(activeTTC = (pilotTTC + copilotTTC) / 60) %>%
   summarise(median = median(activeTTC), IQR = round(IQR(activeTTC)), min = round(min(activeTTC)), max = round(max(activeTTC)), total = round(sum(activeTTC)))
 
 timeSummary <- data_articles %>%
-  mutate(activeTTC = (pilotTTC + copilotTTC)/60) %>%
+  mutate(activeTTC = (pilotTTC + copilotTTC) / 60) %>%
   summarise(median = median(activeTTC), IQR = round(IQR(activeTTC)), min = round(min(activeTTC)), max = round(max(activeTTC)), total = round(sum(activeTTC)))
 ```
 Team members provided concurrent estimates of their time spent on each stage of the analysis. Altogether, they estimated that they spent between `r timeSummary %>% pull(min)` and `r timeSummary %>% pull(max)` (median = `r timeSummary %>% pull(median)`, interquartile range = `r timeSummary %>% pull(IQR)`) hours actively working on each reproducibility check (Supplementary Figure \@ref(fig:timePlot); total time = `r timeSummary %>% pull(total)` hours). This estimate excludes time spent waiting on internal (within our team) and external (with original authors) communications. Availability of original analysis scripts appeared to provide some modest benefits in terms of reproducibility outcomes and time expenditure (see Supplementary Information \@ref(supresults)).
@@ -343,7 +369,7 @@ Together with previous findings [@hardwicke2018a], this study has highlighted th
 
 # Open practices statement
 
-The study protocol (hypotheses, methods, and analysis plan) was pre-registered on the Open Science Framework on October 18, 2017 (https://osf.io/2cnkq/). All deviations from this protocol or additional exploratory analyses are explicitly acknowledged in Supplementary Information \@ref(prereg). We report how we determined our sample size, all data exclusions, all manipulations, and all measures in the study. All data, materials, and analysis scripts related to this study are publicly available on the Open Science Framework (https://osf.io/n3dej/). To facilitate reproducibility this manuscript was written by interleaving regular prose and analysis code using knitr [@R-knitr] and papaja [@R-papaja], and is available in a Code Ocean container (https://doi.org/10.24433/CO.1796004.v2) which re-creates the software environment in which the original analyses were performed. Analysis code, reports, and Code Ocean containers are also available for each reproducibility check (Supplementary Information \@ref(vignettes)).
+The study protocol (hypotheses, methods, and analysis plan) was pre-registered on the Open Science Framework on October 18, 2017 (https://osf.io/2cnkq/). All deviations from this protocol or additional exploratory analyses are explicitly acknowledged in Supplementary Information \@ref(prereg). We report how we determined our sample size, all data exclusions, all manipulations, and all measures in the study. All data, materials, and analysis scripts related to this study are publicly available on the Open Science Framework (https://osf.io/n3dej/). To facilitate reproducibility this manuscript was written by interleaving regular prose and analysis code using knitr [@R-knitr] and papaja [@R-papaja], and is available in a Code Ocean container (https://doi.org/10.24433/CO.1796004.v3) which re-creates the software environment in which the original analyses were performed. Analysis code, reports, and Code Ocean containers are also available for each reproducibility check (Supplementary Information \@ref(vignettes)).
 
 # Conflict of interest statement
 
@@ -375,24 +401,28 @@ render_appendix("supplementary_information.Rmd")
 totalValues <- nrow(data_values)
 totalArticles <- nrow(data_articles)
 majorErrors <- majorErrors
-reproRateValues <- paste0(majorErrors_percent,'% ',majorErrors_percentCI)
-intialReproN <- reproBefore %>% filter(reproOutcome == F) %>% pull(n)
-initialReproCI <- reproBefore %>% filter(reproOutcome == F) %>% pull(percent)
-intialReproRateArticles <- paste0(intialReproN,' (', initialReproCI,')')
+reproRateValues <- paste0(majorErrors_percent, "% ", majorErrors_percentCI)
+intialReproN <- reproBefore %>%
+  filter(reproOutcome == F) %>%
+  pull(n)
+initialReproCI <- reproBefore %>%
+  filter(reproOutcome == F) %>%
+  pull(percent)
+intialReproRateArticles <- paste0(intialReproN, " (", initialReproCI, ")")
 
-noRepro_withAI <- articleLevelSummary %>% 
+noRepro_withAI <- articleLevelSummary %>%
   filter(finalOutcome == "Not reproducible\nwith author\ninvolvement") %>%
   pull(fullReport)
 
-noRepro_noAI <- articleLevelSummary %>% 
+noRepro_noAI <- articleLevelSummary %>%
   filter(finalOutcome == "Not reproducible\nwithout author\ninvolvement") %>%
   pull(fullReport)
 
-repro_withAI <- articleLevelSummary %>% 
+repro_withAI <- articleLevelSummary %>%
   filter(finalOutcome == "Reproducible\nwith author\ninvolvement") %>%
   pull(fullReport)
 
-repro_noAI <- articleLevelSummary %>% 
+repro_noAI <- articleLevelSummary %>%
   filter(finalOutcome == "Reproducible\nwithout author\ninvolvement") %>%
   pull(fullReport)
 ```
